@@ -5,7 +5,7 @@ const APP_SHELL = [
   './manifest.webmanifest',
   './icons/icon-192.png',
   './icons/icon-512.png',
-  './vendor/node_modules/mathjax/tex-chtml.js'
+  './vendor/mathjax/tex-chtml.js'
 ];
 
 self.addEventListener('install', event => {
