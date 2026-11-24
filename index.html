@@ -99,10 +99,14 @@ footer{border-top:1px solid var(--line);padding:18px 0 28px;color:var(--muted);f
 <script>
 window.MathJax = {
   tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+  chtml: {
+    fontURL: './vendor/node_modules/@mathjax/mathjax-newcm-font/chtml/woff2',
+    dynamicPrefix: './vendor/node_modules/@mathjax/mathjax-newcm-font/chtml/dynamic'
+  },
   startup: { typeset: true },
   options: { enableMenu: true }
 };
-</script><script defer="True" src="./node_modules/mathjax/tex-chtml.js"></script></head>
+</script><script defer="True" src="./vendor/node_modules/mathjax/tex-chtml.js"></script></head>
 <body>
 <header>
 <div class="wrap">
