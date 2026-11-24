@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#111111" name="theme-color"/>
+<title>Class 11 Economics — Formula Book</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="description" content="Class 11 Economics formula reference and offline mental-math practice.">
+<style>
+:root{--bg:#101010;--panel:#191919;--panel2:#202020;--text:#f2f0e9;--muted:#aaa69b;--gold:#d8b44a;--line:#39352a;--green:#9bc79b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{padding:30px 18px 22px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,#171717,#101010)}
+.wrap{width:min(100% - 28px,980px);margin:auto}
+.kicker{color:var(--gold);font-size:.76rem;letter-spacing:.16em;font-weight:700}
+h1{font-size:clamp(1.8rem,5vw,2.7rem);line-height:1.1;margin:9px 0}
+.sub{color:var(--muted);max-width:720px;margin:0}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 14px}
+input{flex:1;min-width:190px;background:var(--panel);border:1px solid var(--line);border-radius:10px;color:var(--text);padding:12px 14px;font:inherit}
+button{cursor:pointer;font:inherit}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab{border:1px solid var(--line);border-radius:999px;padding:10px 16px;background:var(--panel);color:var(--text)}
+.tab[aria-selected=true]{background:var(--gold);color:#17140b;border-color:var(--gold);font-weight:750}
+main{padding:22px 0 60px}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:8px 0 18px}
+h2{font-size:1.55rem;margin:0}
+.section-note{color:var(--muted);font-size:.9rem;margin:4px 0 0}
+.group{margin:26px 0}
+h3{font-size:1.05rem;color:var(--gold);margin:0 0 12px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px;min-width:0}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.card h4{font-size:1rem;margin:0 0 9px}
+.copy{flex:none;border:1px solid var(--line);background:var(--panel2);color:var(--gold);border-radius:8px;padding:6px 9px;font-size:.8rem}
+.formula{background:#111;padding:11px 12px;border-radius:9px;border:1px solid #302b20;color:#f8e7b0;font:600 .98rem/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;margin:4px 0 10px}
+.meta{color:var(--muted);font-size:.9rem;margin:6px 0 0}
+.meta b{color:#ded8c7;font-weight:650}
+.empty{display:none;padding:22px;border:1px dashed var(--line);border-radius:12px;color:var(--muted);text-align:center}
+footer{border-top:1px solid var(--line);padding:18px 0 28px;color:var(--muted);font-size:.85rem}
+.hidden{display:none!important}
+@media print{
+ body{background:#fff;color:#111}
+ header{background:#fff;border-bottom:1px solid #bbb}
+ .kicker,h3{color:#745600}
+ .sub,.section-note,.meta,footer{color:#444}
+ .toolbar,.copy{display:none!important}
+ .card{break-inside:avoid;background:#fff;border:1px solid #bbb}
+ .formula{background:#f5f5f5;color:#111;border:1px solid #ccc}
+ .tab{display:none}
+ main{padding-top:0}
+}
+
+.math-formula{font-family:inherit;white-space:normal;overflow-x:auto;overflow-y:hidden;text-align:center;min-height:2.8em}
+.math-formula mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden;margin:.15em 0!important}
+.math-formula mjx-container[display=true]{margin:.15em 0!important}
+
+/* Math Practice */
+.practice-wrap{max-width:760px;margin:10px auto 28px}
+.practice-panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;margin:14px 0}
+.practice-modes{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:14px 0}
+.mode-btn{background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:11px;padding:12px 8px;font-weight:700}
+.mode-btn.active{border-color:var(--gold);background:#2a2415;color:#f2d77e}
+.mode-btn small{display:block;color:var(--muted);font-weight:500}
+.practice-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0}
+.stat{background:#111;border:1px solid var(--line);border-radius:11px;padding:10px;text-align:center}
+.stat strong{display:block;color:var(--gold);font-size:1.35rem}
+.stat span{font-size:.78rem;color:var(--muted)}
+.question-box{text-align:center;padding:22px 12px;background:#111;border:1px solid #302b20;border-radius:14px;margin:14px 0}
+.question-label{color:var(--muted);font-size:.85rem}
+.question{font-size:clamp(2.4rem,10vw,4rem);font-weight:800;letter-spacing:.03em;line-height:1.25;margin:8px 0;color:#f8e7b0}
+.timer-track{height:9px;background:#34302a;border-radius:99px;overflow:hidden;margin:14px 0 5px}
+.timer-fill{height:100%;width:100%;background:var(--gold);transition:width .08s linear}
+.answer-row{display:flex;gap:9px;max-width:440px;margin:12px auto}
+.answer-row input{min-width:0;text-align:center;font-size:1.25rem;font-weight:700}
+.action-btn{border:1px solid var(--gold);background:var(--gold);color:#17140b;border-radius:10px;padding:11px 17px;font-weight:800}
+.secondary-btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;padding:10px 14px}
+.action-btn:disabled{background:var(--panel2);border-color:var(--line);color:var(--muted);opacity:.72;cursor:not-allowed}
+.secondary-btn.is-primary{border-color:var(--gold);background:var(--gold);color:#17140b;font-weight:800}
+.secondary-btn:disabled{opacity:.55;cursor:not-allowed}
+.action-row{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin-top:12px}
+.feedback{min-height:26px;text-align:center;font-weight:750;margin:8px 0;color:var(--gold)}
+.report-table{width:100%;border-collapse:collapse;font-size:.9rem}
+.report-table th,.report-table td{padding:9px 6px;border-bottom:1px solid var(--line);text-align:center}
+.report-table th{color:var(--gold);font-weight:700}
+.report-table td:first-child,.report-table th:first-child{text-align:left}
+.report-list{display:grid;gap:8px}
+.report-day{display:flex;justify-content:space-between;gap:10px;align-items:center;background:#111;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.report-day small{display:block;color:var(--muted)}
+.practice-note{color:var(--muted);font-size:.85rem}
+@media(max-width:480px){.practice-panel{padding:13px}.practice-stats{gap:6px}.stat{padding:8px 4px}.stat strong{font-size:1.15rem}.answer-row{gap:6px}.action-btn{padding:10px 12px}}
+
+</style>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+  startup: { typeset: true },
+  options: { enableMenu: true }
+};
+</script><script defer="True" src="./node_modules/mathjax/tex-chtml.js"></script></head>
+<body>
+<header>
+<div class="wrap">
+<div class="kicker">STUDY REFERENCE · CLASS XI · 2026–27</div>
+<h1>Economics Formula Book</h1>
+<p class="sub">One place for the important numerical formulas in Statistics for Economics and Introductory Microeconomics. Search, switch sections, and copy a formula when practising questions.</p>
+</div>
+</header>
+<main class="wrap">
+<div class="toolbar">
+<input aria-label="Search formulas" id="search" placeholder="Search formula, chapter, or symbol…" type="search"/>
+<div aria-label="Economics sections" class="tabs" role="tablist">
+<button aria-controls="statistics" aria-selected="true" class="tab" id="statsTab" role="tab">Statistics for Economics</button>
+<button aria-controls="microeconomics" aria-selected="false" class="tab" id="microTab" role="tab">Introductory Microeconomics</button>
+<button aria-controls="mathPractice" aria-selected="false" class="tab" id="practiceTab" role="tab">Math Practice</button>
+</div>
+</div>
+<section aria-labelledby="statsTab" id="statistics" role="tabpanel">
+<div class="section-head"><div><h2>01 / Statistics for Economics</h2><p class="section-note">Formulas grouped by the relevant Statistics topics.</p></div></div>
+<div class="group">
+<h3>Collection, Organisation &amp; Presentation of Data</h3>
+<div class="cards">
+<article class="card" data-search="pie diagram angular part component value total value angle">
+<div class="card-top"><h4>Pie Diagram — Central Angle</h4><button class="copy" data-copy="Angle = (Component Value ÷ Total Value) × 360°">Copy</button></div>
+<div class="formula math-formula">\[\theta=\frac{\text{Component Value}}{\text{Total Value}}\times 360^\circ\]</div>
+<p class="meta"><b>Use:</b> To calculate the angle of a sector in a pie diagram.</p>
+</article>
+<article class="card" data-search="class mark midpoint continuous series upper lower limit">
+<div class="card-top"><h4>Class Mark / Midpoint</h4><button class="copy" data-copy="m = (Upper Class Limit + Lower Class Limit) / 2">Copy</button></div>
+<div class="formula math-formula">\[m=\frac{\text{Upper Class Limit}+\text{Lower Class Limit}}{2}\]</div>
+<p class="meta"><b>Use:</b> To find the midpoint of a class interval, especially for the continuous-series mean.</p>
+</article>
+</div>
+</div>
+<div class="group">
+<h3>Measures of Central Tendency</h3>
+<div class="cards">
+<article class="card" data-search="arithmetic mean individual series direct method">
+<div class="card-top"><h4>Arithmetic Mean — Individual Series (Direct)</h4><button class="copy" data-copy="X̄ = ΣX / N">Copy</button></div>
+<div class="formula math-formula">\[\bar X=\frac{\sum X}{N}\]</div>
+<p class="meta"><b>Symbols:</b> ΣX = sum of observations; N = number of observations.</p>
+<p class="meta"><b>Use:</b> When individual observations are given.</p>
+</article>
+<article class="card" data-search="arithmetic mean individual series assumed shortcut mean deviation">
+<div class="card-top"><h4>Arithmetic Mean — Individual Series (Shortcut)</h4><button class="copy" data-copy="X̄ = A + (Σd / N), where d = X − A">Copy</button></div>
+<div class="formula math-formula">\[\begin{aligned}\bar X&amp;=A+\frac{\sum d}{N}\\ d&amp;=X-A\end{aligned}\]</div>
+<p class="meta"><b>Symbols:</b> A = assumed mean; d = deviation from A; N = number of observations.</p>
+<p class="meta"><b>Use:</b> When deviations from an assumed mean make calculation easier.</p>
+</article>
+<article class="card" data-search="arithmetic mean individual series step deviation">
+<div class="card-top"><h4>Arithmetic Mean — Individual Series (Step-Deviation)</h4><button class="copy" data-copy="X̄ = A + (Σd′ / N) × C, where d′ = (X − A) / C">Copy</button></div>
+<div class="formula math-formula">\[\begin{aligned}\bar X&amp;=A+\frac{\sum d'}{N}\times C\\ d'&amp;=\frac{X-A}{C}\end{aligned}\]</div>
+<p class="meta"><b>Symbols:</b> A = assumed mean; C = common factor; d′ = step-deviation.</p>
+<p class="meta"><b>Use:</b> When values or class intervals share a common factor.</p>
+</article>
+<article class="card" data-search="arithmetic mean discrete series direct frequency">
+<div class="card-top"><h4>Arithmetic Mean — Discrete Series (Direct)</h4><button class="copy" data-copy="X̄ = ΣfX / N; N = Σf">Copy</button></div>
+<div class="formula math-formula">\[\begin{aligned}\bar X&amp;=\frac{\sum fX}{N}\\N&amp;=\sum f\end{aligned}\]</div>
+<p class="meta"><b>Symbols:</b> f = frequency; X = value; N = total frequency.</p>
+<p class="meta"><b>Use:</b> When each value is given with its frequency.</p>
+</article>
+<article class="card" data-search="arithmetic mean discrete series shortcut assumed mean">
+<div class="card-top"><h4>Arithmetic Mean — Discrete Series (Shortcut)</h4><button class="copy" data-copy="X̄ = A + (Σfd / N); d = X − A; N = Σf">Copy</button></div>
+<div class="formula math-formula">\[\begin{aligned}\bar X&amp;=A+\frac{\sum fd}{N}\\d&amp;=X-A,\quad N=\sum f\end{aligned}\]</div>
+<p class="meta"><b>Symbols:</b> A = assumed mean; f = frequency; d = X − A.</p>
+</article>
+<article class="card" data-search="arithmetic mean discrete series step deviation">
+<div class="card-top"><h4>Arithmetic Mean — Discrete Series (Step-Deviation)</h4><button class="copy" data-copy="X̄ = A + (Σfd′ / N) × C; d′ = (X − A) / C; N = Σf">Copy</button></div>
+<div class="formula math-formula">\[\begin{aligned}\bar X&amp;=A+\frac{\sum fd'}{N}\times C\\d'&amp;=\frac{X-A}{C},\quad N=\sum f\end{aligned}\]</div>
+<p class="meta"><b>Symbols:</b> A = assumed mean; C = common factor; f = frequency.</p>
+</article>
+<article class="card" data-search="arithmetic mean continuous series direct class mark">
+<div class="card-top"><h4>Arithmetic Mean — Continuous Series (Direct)</h4><button class="copy" data-copy="X̄ = Σfm / N; m = (Upper Limit + Lower Limit) / 2; N = Σf">Copy</button></div>
+<div class="formula math-formula">\[\begin{aligned}\bar X&amp;=\frac{\sum fm}{N}\\m&amp;=\frac{\text{Upper Limit}+\text{Lower Limit}}{2}\\N&amp;=\sum f\end{aligned}\]</div>
+<p class="meta"><b>Symbols:</b> f = frequency; m = class mark; N = total frequency.</p>
+</article>
+<article class="card" data-search="arithmetic mean continuous series shortcut">
+<div class="card-top"><h4>Arithmetic Mean — Continuous Series (Shortcut)</h4><button class="copy" data-copy="X̄ = A + (Σfd / N); d = m − A; N = Σf">Copy</button></div>
+<div class="formula math-formula">\[\begin{aligned}\bar X&amp;=A+\frac{\sum fd}{N}\\d&amp;=m-A,\quad N=\sum f\end{aligned}\]</div>
+<p class="meta"><b>Symbols:</b> A = assumed mean; m = class mark; f = frequency.</p>
+</article>
+<article class="card" data-search="arithmetic mean continuous series step deviation">
+<div class="card-top"><h4>Arithmetic Mean — Continuous Series (Step-Deviation)</h4><button class="copy" data-copy="X̄ = A + (Σfd′ / N) × C; d′ = (m − A) / C; N = Σf">Copy</button></div>
+<div class="formula math-formula">\[\begin{aligned}\bar X&amp;=A+\frac{\sum fd'}{N}\times C\\d'&amp;=\frac{m-A}{C},\quad N=\sum f\end{aligned}\]</div>
+<p class="meta"><b>Symbols:</b> A = assumed mean; C = common factor; m = class mark.</p>
+</article>
+<article class="card" data-search="weighted arithmetic mean weights">
+<div class="card-top"><h4>Weighted Arithmetic Mean</h4><button class="copy" data-copy="X̄w = ΣWX / ΣW">Copy</button></div>
+<div class="formula math-formula">\[\bar X_w=\frac{\sum WX}{\sum W}\]</div>
+<p class="meta"><b>Symbols:</b> W = weight; X = value.</p>
+<p class="meta"><b>Use:</b> When different items are assigned different weights.</p>
+</article>
+<article class="card" data-search="median individual series odd number position">
+<div class="card-top"><h4>Median — Individual Series (Odd N)</h4><button class="copy" data-copy="Median = size of the ((N + 1) / 2)th item">Copy</button></div>
+<div class="formula math-formula">\[\text{Median}=\text{size of the }\left(\frac{N+1}{2}\right)^{\text{th}}\text{ item}\]</div>
+<p class="meta"><b>Use:</b> Arrange observations in ascending or descending order first.</p>
+</article>
+<article class="card" data-search="median individual series even number">
+<div class="card-top"><h4>Median — Individual Series (Even N)</h4><button class="copy" data-copy="Median = [size of (N/2)th item + size of (N/2 + 1)th item] / 2">Copy</button></div>
+<div class="formula math-formula">\[\text{Median}=\frac{\text{size of }\left(\frac N2\right)^{\text{th}}\text{ item}+\text{size of }\left(\frac N2+1\right)^{\text{th}}\text{ item}}{2}\]</div>
+<p class="meta"><b>Use:</b> Arrange observations first; take the average of the two middle items.</p>
+</article>
+<article class="card" data-search="median discrete series cumulative frequency">
+<div class="card-top"><h4>Median — Discrete Series</h4><button class="copy" data-copy="Median = size of the ((N + 1) / 2)th item; N = Σf">Copy</button></div>
+<div class="formula math-formula">\[\begin{aligned}\text{Median}&amp;=\text{size of the }\left(\frac{N+1}{2}\right)^{\text{th}}\text{ item}\\N&amp;=\sum f\end{aligned}\]</div>
+<p class="meta"><b>Use:</b> Find cumulative frequency and locate the median item.</p>
+</article>
+<article class="card" data-search="median continuous series formula">
+<div class="card-top"><h4>Median — Continuous Series</h4><button class="copy" data-copy="M = L₁ + [(N/2 − CF) / f] × i">Copy</button></div>
+<div class="formula math-formula">\[M=L_1+\frac{\frac N2-CF}{f}\times i\]</div>
+<p class="meta"><b>Symbols:</b> L₁ = lower limit of median class; N = total frequency; CF = cumulative frequency before median class; f = median-class frequency; i = class interval.</p>
+</article>
+<article class="card" data-search="mode individual discrete highest frequency">
+<div class="card-top"><h4>Mode — Individual / Discrete Series</h4><button class="copy" data-copy="Mode = observation with the highest frequency">Copy</button></div>
+<div class="formula math-formula">\[\text{Mode}=\text{observation with the highest frequency}\]</div>
+<p class="meta"><b>Use:</b> Identify the value that occurs most often.</p>
+</article>
+<article class="card" data-search="mode continuous series modal class">
+<div class="card-top"><h4>Mode — Continuous Series</h4><button class="copy" data-copy="Z = L₁ + [(f₁ − f₀) / (2f₁ − f₀ − f₂)] × i">Copy</button></div>
+<div class="formula math-formula">\[Z=L_1+\frac{f_1-f_0}{2f_1-f_0-f_2}\times i\]</div>
+<p class="meta"><b>Symbols:</b> L₁ = lower limit of modal class; f₁ = modal-class frequency; f₀ = preceding frequency; f₂ = succeeding frequency; i = class interval.</p>
+</article>
+<article class="card" data-search="empirical relation mean median mode">
+<div class="card-top"><h4>Empirical Relationship: Mean, Median &amp; Mode</h4><button class="copy" data-copy="Mode = 3 × Median − 2 × Mean">Copy</button></div>
+<div class="formula math-formula">\[\text{Mode}=3\times\text{Median}-2\times\text{Mean}\]</div>
+<p class="meta"><b>Use:</b> To estimate one measure when the other two are known, where the empirical relationship is applicable.</p>
+</article>
+</div>
+</div>
+<div class="group">
+<h3>Correlation</h3>
+<div class="cards">
+<article class="card" data-search="pearson actual mean method correlation coefficient">
+<div class="card-top"><h4>Karl Pearson — Actual Mean Method</h4><button class="copy" data-copy="r = Σxy / √(Σx² × Σy²); x = X − X̄; y = Y − Ȳ">Copy</button></div>
+<div class="formula math-formula">\[\begin{aligned}r&amp;=\frac{\sum xy}{\sqrt{\sum x^2\times\sum y^2}}\\x&amp;=X-\bar X,\quad y=Y-\bar Y\end{aligned}\]</div>
+<p class="meta"><b>Symbols:</b> X̄ and Ȳ = arithmetic means of X and Y; x and y = deviations from their respective means.</p>
+</article>
+<article class="card" data-search="mean of x and y series pearson correlation">
+<div class="card-top"><h4>Means of the X and Y Series</h4><button class="copy" data-copy="X̄ = ΣX / N; Ȳ = ΣY / N">Copy</button></div>
+<div class="formula math-formula">\[\begin{aligned}\bar X&amp;=\frac{\sum X}{N}\\\bar Y&amp;=\frac{\sum Y}{N}\end{aligned}\]</div>
+<p class="meta"><b>Use:</b> To calculate the arithmetic means before finding deviations in Karl Pearson's actual-mean method.</p>
+</article>
+<article class="card" data-search="standard deviation x y pearson correlation">
+<div class="card-top"><h4>Standard Deviations of X and Y</h4><button class="copy" data-copy="σₓ = √(Σx² / N);  σᵧ = √(Σy² / N)">Copy</button></div>
+<div class="formula math-formula">\[\begin{aligned}\sigma_x&amp;=\sqrt{\frac{\sum x^2}{N}}\\\sigma_y&amp;=\sqrt{\frac{\sum y^2}{N}}\end{aligned}\]</div>
+<p class="meta"><b>Symbols:</b> x = X − X̄; y = Y − Ȳ; N = number of paired observations.</p>
+</article>
+<article class="card" data-search="covariance x y pearson correlation">
+<div class="card-top"><h4>Covariance of X and Y</h4><button class="copy" data-copy="Cov(X,Y) = Σxy / N">Copy</button></div>
+<div class="formula math-formula">\[\operatorname{Cov}(X,Y)=\frac{\sum xy}{N}\]</div>
+<p class="meta"><b>Use:</b> The support material also expresses Pearson's coefficient as r = Cov(X,Y) / (σₓ × σᵧ).</p>
+</article>
+<article class="card" data-search="pearson assumed mean method correlation">
+<div class="card-top"><h4>Karl Pearson — Assumed Mean Method</h4><button class="copy" data-copy="r = [NΣdxdy − (Σdx)(Σdy)] / {√[NΣdx² − (Σdx)²] × √[NΣdy² − (Σdy)²]}; dx = X − Aₓ; dy = Y − Aᵧ">Copy</button></div>
+<div class="formula math-formula">\[r=\frac{N\sum dxdy-(\sum dx)(\sum dy)}{\sqrt{N\sum dx^2-(\sum dx)^2}\,\sqrt{N\sum dy^2-(\sum dy)^2}}\]</div>
+<p class="meta"><b>Symbols:</b> Aₓ and Aᵧ = assumed means of the X and Y series; N = number of paired observations.</p>
+</article>
+<article class="card" data-search="pearson step deviation method correlation">
+<div class="card-top"><h4>Karl Pearson — Step-Deviation Method</h4><button class="copy" data-copy="r = [NΣdx′dy′ − (Σdx′)(Σdy′)] / {√[NΣdx′² − (Σdx′)²] × √[NΣdy′² − (Σdy′)²]}; dx′ = (X − Aₓ)/iₓ; dy′ = (Y − Aᵧ)/iᵧ">Copy</button></div>
+<div class="formula math-formula">\[\begin{aligned}r&amp;=\frac{N\sum d_x'd_y'-(\sum d_x')(\sum d_y')}{\sqrt{N\sum {d_x'}^2-(\sum d_x')^2}\,\sqrt{N\sum {d_y'}^2-(\sum d_y')^2}}\\d_x'&amp;=\frac{X-A_x}{i_x}\\d_y'&amp;=\frac{Y-A_y}{i_y}\end{aligned}\]</div>
+<p class="meta"><b>Symbols:</b> Aₓ, Aᵧ = assumed means; iₓ, iᵧ = common factors for the two series.</p>
+</article>
+<article class="card" data-search="pearson direct method raw values">
+<div class="card-top"><h4>Karl Pearson — Direct Method</h4><button class="copy" data-copy="r = [NΣXY − (ΣX)(ΣY)] / {√[NΣX² − (ΣX)²] × √[NΣY² − (ΣY)²]}">Copy</button></div>
+<div class="formula math-formula">\[r=\frac{N\sum XY-(\sum X)(\sum Y)}{\sqrt{N\sum X^2-(\sum X)^2}\,\sqrt{N\sum Y^2-(\sum Y)^2}}\]</div>
+<p class="meta"><b>Use:</b> Directly with paired X and Y observations.</p>
+</article>
+<article class="card" data-search="spearman rank correlation no repeated ranks">
+<div class="card-top"><h4>Spearman Rank Correlation — No Tied Ranks</h4><button class="copy" data-copy="rₖ = 1 − [6ΣD² / (N³ − N)]">Copy</button></div>
+<div class="formula math-formula">\[r_k=1-\frac{6\sum D^2}{N^3-N}\]</div>
+<p class="meta"><b>Symbols:</b> D = difference between paired ranks; N = number of pairs.</p>
+</article>
+<article class="card" data-search="spearman rank correlation repeated tied ranks correction">
+<div class="card-top"><h4>Spearman Rank Correlation — Tied Ranks</h4><button class="copy" data-copy="rₖ = 1 − {6[ΣD² + Σ(m³ − m)/12] / (N³ − N)}">Copy</button></div>
+<div class="formula math-formula">\[r_k=1-\frac{6\left[\sum D^2+\frac{\sum(m^3-m)}{12}\right]}{N^3-N}\]</div>
+<p class="meta"><b>Symbols:</b> m = number of equal observations in each tied group; add one correction term for every tied group. Give tied observations their average rank.</p>
+</article>
+</div>
+</div>
+<div class="group">
+<h3>Index Numbers</h3>
+<div class="cards">
+<article class="card" data-search="simple aggregative price index base year current year">
+<div class="card-top"><h4>Simple Aggregative Price Index</h4><button class="copy" data-copy="P₀₁ = (ΣP₁ / ΣP₀) × 100">Copy</button></div>
+<div class="formula math-formula">\[P_{01}=\frac{\sum P_1}{\sum P_0}\times100\]</div>
+<p class="meta"><b>Symbols:</b> P₁ = current-year prices; P₀ = base-year prices.</p>
+</article>
+<article class="card" data-search="inflation rate price index current year base year">
+<div class="card-top"><h4>Rate of Inflation</h4><button class="copy" data-copy="Inflation Rate = [(I₁ − I₀) / I₀] × 100">Copy</button></div>
+<div class="formula math-formula">\[\text{Inflation Rate}=\frac{I_1-I_0}{I_0}\times100\]</div>
+<p class="meta"><b>Symbols:</b> I₁ = current-year price index; I₀ = base-year price index.</p>
+</article>
+</div>
+</div>
+</section>
+<section aria-labelledby="microTab" class="hidden" id="microeconomics" role="tabpanel">
+<div class="section-head"><div><h2>02 / Introductory Microeconomics</h2><p class="section-note">Formulas grouped by Introduction, Consumer, Producer, and Market topics.</p></div></div>
+<div class="group">
+<h3>Introduction — Mathematical Tools, PPF &amp; MRT</h3>
+<div class="cards">
+<article class="card" data-search="slope straight line graph change y x">
+<div class="card-top"><h4>Slope of a Straight Line</h4><button class="copy" data-copy="Slope = ΔY / ΔX">Copy</button></div>
+<div class="formula math-formula">\[\text{Slope}=\frac{\Delta Y}{\Delta X}\]</div>
+<p class="meta"><b>Symbols:</b> ΔY = change in Y; ΔX = change in X.</p>
+</article>
+<article class="card" data-search="equation upward straight line">
+<div class="card-top"><h4>Equation of an Upward-Sloping Line</h4><button class="copy" data-copy="Y = a + bX">Copy</button></div>
+<div class="formula math-formula">\[Y=a+bX\]</div>
+<p class="meta"><b>Symbols:</b> a = Y-intercept; b = slope; X = independent variable.</p>
+</article>
+<article class="card" data-search="equation downward straight line">
+<div class="card-top"><h4>Equation of a Downward-Sloping Line</h4><button class="copy" data-copy="Y = a − bX">Copy</button></div>
+<div class="formula math-formula">\[Y=a-bX\]</div>
+<p class="meta"><b>Symbols:</b> a = Y-intercept; b = magnitude of slope.</p>
+</article>
+<article class="card" data-search="marginal rate transformation opportunity cost ppf">
+<div class="card-top"><h4>Marginal Rate of Transformation (MRT)</h4><button class="copy" data-copy="MRT = ΔY / ΔX">Copy</button></div>
+<div class="formula math-formula">\[\text{MRT}=\frac{\Delta Y}{\Delta X}\]</div>
+<p class="meta"><b>Use:</b> To express how much of one good is sacrificed to produce an additional unit of the other good.</p>
+</article>
+</div>
+</div>
+<div class="group">
+<h3>Consumer's Equilibrium &amp; Demand</h3>
+<div class="cards">
+<article class="card" data-search="total utility sum marginal utility">
+<div class="card-top"><h4>Total Utility</h4><button class="copy" data-copy="TU = ΣMU">Copy</button></div>
+<div class="formula math-formula">\[TU=\sum MU\]</div>
+<p class="meta"><b>Use:</b> Total utility is the sum of marginal utilities of the units consumed.</p>
+</article>
+<article class="card" data-search="marginal utility change total utility change quantity">
+<div class="card-top"><h4>Marginal Utility</h4><button class="copy" data-copy="MU = ΔTU / ΔQ">Copy</button></div>
+<div class="formula math-formula">\[MU=\frac{\Delta TU}{\Delta Q}\]</div>
+<p class="meta"><b>Symbols:</b> ΔTU = change in total utility; ΔQ = change in quantity.</p>
+</article>
+<article class="card" data-search="budget set budget constraint consumer">
+<div class="card-top"><h4>Budget Set / Budget Constraint</h4><button class="copy" data-copy="PₓQₓ + PᵧQᵧ ≤ M">Copy</button></div>
+<div class="formula math-formula">\[P_xQ_x+P_yQ_y\leq M\]</div>
+<p class="meta"><b>Symbols:</b> Pₓ, Pᵧ = prices; Qₓ, Qᵧ = quantities; M = consumer's income.</p>
+</article>
+<article class="card" data-search="budget line equation consumer">
+<div class="card-top"><h4>Budget Line</h4><button class="copy" data-copy="PₓQₓ + PᵧQᵧ = M">Copy</button></div>
+<div class="formula math-formula">\[P_xQ_x+P_yQ_y=M\]</div>
+<p class="meta"><b>Use:</b> Shows combinations of two goods that use the consumer's entire income.</p>
+</article>
+<article class="card" data-search="consumer equilibrium one commodity cardinal utility">
+<div class="card-top"><h4>Consumer's Equilibrium — One Commodity (Cardinal)</h4><button class="copy" data-copy="MUₓ / Pₓ = MUₘ">Copy</button></div>
+<div class="formula math-formula">\[\frac{MU_x}{P_x}=MU_m\]</div>
+<p class="meta"><b>Symbols:</b> MUₓ = marginal utility of good X; Pₓ = price of X; MUₘ = marginal utility of money.</p>
+</article>
+<article class="card" data-search="consumer equilibrium two commodities cardinal">
+<div class="card-top"><h4>Consumer's Equilibrium — Two Commodities (Cardinal)</h4><button class="copy" data-copy="MUₓ / Pₓ = MUᵧ / Pᵧ = MUₘ">Copy</button></div>
+<div class="formula math-formula">\[\frac{MU_x}{P_x}=\frac{MU_y}{P_y}=MU_m\]</div>
+<p class="meta"><b>Use:</b> Along with the condition that marginal utility diminishes.</p>
+</article>
+<article class="card" data-search="marginal rate substitution indifference curve equilibrium">
+<div class="card-top"><h4>Consumer's Equilibrium — Indifference Curve</h4><button class="copy" data-copy="MRSₓᵧ = Pₓ / Pᵧ">Copy</button></div>
+<div class="formula math-formula">\[MRS_{xy}=\frac{P_x}{P_y}\]</div>
+<p class="meta"><b>Condition:</b> The budget line is tangent to the indifference curve and MRS is diminishing.</p>
+</article>
+<article class="card" data-search="slope budget line">
+<div class="card-top"><h4>Slope of Budget Line</h4><button class="copy" data-copy="Slope = −Pₓ / Pᵧ">Copy</button></div>
+<div class="formula math-formula">\[\text{Slope}=-\frac{P_x}{P_y}\]</div>
+<p class="meta"><b>Symbols:</b> Pₓ and Pᵧ = prices of the two goods.</p>
+</article>
+<article class="card" data-search="slope demand curve change price quantity">
+<div class="card-top"><h4>Slope of Demand Curve</h4><button class="copy" data-copy="Slope = ΔP / ΔQ">Copy</button></div>
+<div class="formula math-formula">\[\text{Slope}=\frac{\Delta P}{\Delta Q}\]</div>
+<p class="meta"><b>Symbols:</b> ΔP = change in price; ΔQ = change in quantity demanded.</p>
+</article>
+<article class="card" data-search="price elasticity demand percentage method">
+<div class="card-top"><h4>Price Elasticity of Demand — Percentage Method</h4><button class="copy" data-copy="Eᵈ = (% change in Qᵈ) / (% change in P)">Copy</button></div>
+<div class="formula math-formula">\[E^d=\frac{\%\text{ change in }Q^d}{\%\text{ change in }P}\]</div>
+<p class="meta"><b>Use:</b> Measures the responsiveness of quantity demanded to a change in price. The coefficient is commonly reported by magnitude.</p>
+</article>
+<article class="card" data-search="price elasticity demand proportionate method">
+<div class="card-top"><h4>Price Elasticity of Demand — Proportionate Method</h4><button class="copy" data-copy="Eᵈ = (ΔQ / Q) × (P / ΔP) = (ΔQ / ΔP) × (P / Q)">Copy</button></div>
+<div class="formula math-formula">\[\begin{aligned}E^d&amp;=\frac{\Delta Q}{Q}\times\frac{P}{\Delta P}\\&amp;=\frac{\Delta Q}{\Delta P}\times\frac{P}{Q}\end{aligned}\]</div>
+<p class="meta"><b>Symbols:</b> P and Q = original price and quantity; ΔP and ΔQ = their changes.</p>
+</article>
+<article class="card" data-search="total expenditure price quantity elasticity demand">
+<div class="card-top"><h4>Total Expenditure</h4><button class="copy" data-copy="TE = P × Q">Copy</button></div>
+<div class="formula math-formula">\[TE=P\times Q\]</div>
+<p class="meta"><b>Use:</b> In the total-expenditure method, compare TE before and after the price change to identify elasticity.</p>
+</article>
+</div>
+</div>
+<div class="group">
+<h3>Producer Behaviour &amp; Supply</h3>
+<div class="cards">
+<article class="card" data-search="production function short run long run">
+<div class="card-top"><h4>Production Function</h4><button class="copy" data-copy="Q = f(L, K)">Copy</button></div>
+<div class="formula math-formula">\[Q=f(L,K)\]</div>
+<p class="meta"><b>Symbols:</b> Q = output; L = labour; K = capital. In the short run, at least one factor is fixed.</p>
+</article>
+<article class="card" data-search="average product AP total product labour">
+<div class="card-top"><h4>Average Product (AP)</h4><button class="copy" data-copy="AP = TP / L">Copy</button></div>
+<div class="formula math-formula">\[AP=\frac{TP}{L}\]</div>
+<p class="meta"><b>Symbols:</b> TP = total product; L = units of variable factor (labour).</p>
+</article>
+<article class="card" data-search="marginal product MP change total product labour">
+<div class="card-top"><h4>Marginal Product (MP)</h4><button class="copy" data-copy="MP = ΔTP / ΔL; or MPₙ = TPₙ − TPₙ₋₁">Copy</button></div>
+<div class="formula math-formula">\[\begin{aligned}MP&amp;=\frac{\Delta TP}{\Delta L}\\MP_n&amp;=TP_n-TP_{n-1}\end{aligned}\]</div>
+<p class="meta"><b>Symbols:</b> ΔTP = change in total product; ΔL = change in labour input.</p>
+</article>
+<article class="card" data-search="total cost fixed variable cost">
+<div class="card-top"><h4>Total Cost (TC)</h4><button class="copy" data-copy="TC = TFC + TVC">Copy</button></div>
+<div class="formula math-formula">\[TC=TFC+TVC\]</div>
+<p class="meta"><b>Symbols:</b> TFC = total fixed cost; TVC = total variable cost.</p>
+</article>
+<article class="card" data-search="total fixed cost TFC">
+<div class="card-top"><h4>Total Fixed Cost (TFC)</h4><button class="copy" data-copy="TFC = TC − TVC; or TFC = AFC × Q">Copy</button></div>
+<div class="formula math-formula">\[\begin{aligned}TFC&amp;=TC-TVC\\&amp;=AFC\times Q\end{aligned}\]</div>
+</article>
+<article class="card" data-search="total variable cost TVC">
+<div class="card-top"><h4>Total Variable Cost (TVC)</h4><button class="copy" data-copy="TVC = TC − TFC; or TVC = AVC × Q">Copy</button></div>
+<div class="formula math-formula">\[\begin{aligned}TVC&amp;=TC-TFC\\&amp;=AVC\times Q\end{aligned}\]</div>
+</article>
+<article class="card" data-search="average cost AC">
+<div class="card-top"><h4>Average Cost (AC)</h4><button class="copy" data-copy="AC = TC / Q; or AC = AFC + AVC">Copy</button></div>
+<div class="formula math-formula">\[\begin{aligned}AC&amp;=\frac{TC}{Q}\\&amp;=AFC+AVC\end{aligned}\]</div>
+<p class="meta"><b>Symbols:</b> Q = output.</p>
+</article>
+<article class="card" data-search="average fixed cost AFC">
+<div class="card-top"><h4>Average Fixed Cost (AFC)</h4><button class="copy" data-copy="AFC = TFC / Q; or AFC = AC − AVC">Copy</button></div>
+<div class="formula math-formula">\[\begin{aligned}AFC&amp;=\frac{TFC}{Q}\\&amp;=AC-AVC\end{aligned}\]</div>
+</article>
+<article class="card" data-search="average variable cost AVC">
+<div class="card-top"><h4>Average Variable Cost (AVC)</h4><button class="copy" data-copy="AVC = TVC / Q; or AVC = AC − AFC">Copy</button></div>
+<div class="formula math-formula">\[\begin{aligned}AVC&amp;=\frac{TVC}{Q}\\&amp;=AC-AFC\end{aligned}\]</div>
+</article>
+<article class="card" data-search="marginal cost MC">
+<div class="card-top"><h4>Marginal Cost (MC)</h4><button class="copy" data-copy="MC = ΔTC / ΔQ; or MC = ΔTVC / ΔQ; or MCₙ = TCₙ − TCₙ₋₁">Copy</button></div>
+<div class="formula math-formula">\[\begin{aligned}MC&amp;=\frac{\Delta TC}{\Delta Q}\\&amp;=\frac{\Delta TVC}{\Delta Q}\\MC_n&amp;=TC_n-TC_{n-1}\end{aligned}\]</div>
+<p class="meta"><b>Symbols:</b> ΔTC = change in total cost; ΔQ = change in output.</p>
+</article>
+<article class="card" data-search="total revenue TR price quantity marginal revenue">
+<div class="card-top"><h4>Total Revenue (TR)</h4><button class="copy" data-copy="TR = P × Q; or TR = AR × Q; or TR = ΣMR">Copy</button></div>
+<div class="formula math-formula">\[\begin{aligned}TR&amp;=P\times Q\\&amp;=AR\times Q\\&amp;=\sum MR\end{aligned}\]</div>
+</article>
+<article class="card" data-search="average revenue AR">
+<div class="card-top"><h4>Average Revenue (AR)</h4><button class="copy" data-copy="AR = TR / Q = P">Copy</button></div>
+<div class="formula math-formula">\[AR=\frac{TR}{Q}=P\]</div>
+<p class="meta"><b>Symbols:</b> TR = total revenue; Q = quantity sold; P = price.</p>
+</article>
+<article class="card" data-search="marginal revenue MR">
+<div class="card-top"><h4>Marginal Revenue (MR)</h4><button class="copy" data-copy="MR = ΔTR / ΔQ; or MRₙ = TRₙ − TRₙ₋₁">Copy</button></div>
+<div class="formula math-formula">\[\begin{aligned}MR&amp;=\frac{\Delta TR}{\Delta Q}\\MR_n&amp;=TR_n-TR_{n-1}\end{aligned}\]</div>
+</article>
+<article class="card" data-search="producer equilibrium marginal revenue marginal cost">
+<div class="card-top"><h4>Producer's Equilibrium</h4><button class="copy" data-copy="MR = MC; MC must cut MR from below">Copy</button></div>
+<div class="formula math-formula">\[\begin{aligned}MR&amp;=MC\\&amp;\text{MC must cut MR from below}\end{aligned}\]</div>
+<p class="meta"><b>Use:</b> The equality alone is not enough; the MC curve should be rising and cross MR from below.</p>
+</article>
+<article class="card" data-search="slope supply curve">
+<div class="card-top"><h4>Slope of Supply Curve</h4><button class="copy" data-copy="Slope = ΔP / ΔQₛ">Copy</button></div>
+<div class="formula math-formula">\[\text{Slope}=\frac{\Delta P}{\Delta Q_s}\]</div>
+<p class="meta"><b>Symbols:</b> ΔP = change in price; ΔQₛ = change in quantity supplied.</p>
+</article>
+<article class="card" data-search="price elasticity supply percentage method">
+<div class="card-top"><h4>Price Elasticity of Supply — Percentage Method</h4><button class="copy" data-copy="Eₛ = (% change in Qₛ) / (% change in P)">Copy</button></div>
+<div class="formula math-formula">\[E_s=\frac{\%\text{ change in }Q_s}{\%\text{ change in }P}\]</div>
+</article>
+<article class="card" data-search="price elasticity supply proportionate method">
+<div class="card-top"><h4>Price Elasticity of Supply — Proportionate Method</h4><button class="copy" data-copy="Eₛ = (ΔQₛ / Qₛ) × (P / ΔP) = (ΔQₛ / ΔP) × (P / Qₛ)">Copy</button></div>
+<div class="formula math-formula">\[\begin{aligned}E_s&amp;=\frac{\Delta Q_s}{Q_s}\times\frac{P}{\Delta P}\\&amp;=\frac{\Delta Q_s}{\Delta P}\times\frac{P}{Q_s}\end{aligned}\]</div>
+<p class="meta"><b>Symbols:</b> P and Qₛ = original price and quantity supplied; ΔP and ΔQₛ = their changes.</p>
+</article>
+</div>
+</div>
+<div class="group">
+<h3>Forms of Market &amp; Price Determination</h3>
+<div class="cards">
+<article class="card" data-search="market equilibrium demand supply quantity">
+<div class="card-top"><h4>Market Equilibrium</h4><button class="copy" data-copy="Qᵈ = Qˢ">Copy</button></div>
+<div class="formula math-formula">\[Q^d=Q^s\]</div>
+<p class="meta"><b>Symbols:</b> Qᵈ = market quantity demanded; Qˢ = market quantity supplied.</p>
+</article>
+<article class="card" data-search="excess demand shortage">
+<div class="card-top"><h4>Excess Demand</h4><button class="copy" data-copy="Excess Demand = Qᵈ − Qˢ">Copy</button></div>
+<div class="formula math-formula">\[\text{Excess Demand}=Q^d-Q^s\]</div>
+<p class="meta"><b>Use:</b> When quantity demanded is greater than quantity supplied at the given price.</p>
+</article>
+<article class="card" data-search="excess supply surplus">
+<div class="card-top"><h4>Excess Supply</h4><button class="copy" data-copy="Excess Supply = Qˢ − Qᵈ">Copy</button></div>
+<div class="formula math-formula">\[\text{Excess Supply}=Q^s-Q^d\]</div>
+<p class="meta"><b>Use:</b> When quantity supplied is greater than quantity demanded at the given price.</p>
+</article>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="practiceTab" class="hidden" id="mathPractice" role="tabpanel">
+ <div class="practice-wrap">
+  <div class="section-head"><div><h2>03 / Math Practice</h2><p class="section-note">Sharpen your calculation speed with +, −, × and ÷.</p></div></div>
+  <div class="practice-panel">
+   <h3>Choose Difficulty</h3>
+   <div class="practice-modes" role="group" aria-label="Difficulty">
+    <button class="mode-btn active" data-mode="easy" type="button">Easy<small>30 seconds</small></button>
+    <button class="mode-btn" data-mode="medium" type="button">Medium<small>20 seconds</small></button>
+    <button class="mode-btn" data-mode="hard" type="button">Hard<small>10 seconds</small></button>
+   </div>
+   <div class="practice-stats">
+    <div class="stat"><strong id="sessionPoints">0</strong><span>Points this session</span></div>
+    <div class="stat"><strong id="sessionCorrect">0</strong><span>Correct</span></div>
+    <div class="stat"><strong id="sessionAttempted">0</strong><span>Attempted</span></div>
+   </div>
+   <div class="question-box">
+    <div class="question-label" id="questionLabel">Ready when you are</div>
+    <div class="question" id="questionText">2 + 2 = ?</div>
+    <div class="timer-track"><div class="timer-fill" id="timerFill"></div></div>
+    <div class="question-label" id="timerText">30 seconds</div>
+   </div>
+   <form class="answer-row" id="answerForm">
+    <input id="answerInput" type="number" inputmode="numeric" step="1" placeholder="Your answer" aria-label="Your answer" disabled autocomplete="off"/>
+    <button class="action-btn" id="submitAnswer" type="submit" disabled>Submit</button>
+   </form>
+   <div class="feedback" id="feedback" aria-live="polite">Press Start Practice to begin.</div>
+   <div class="action-row">
+    <button class="action-btn" id="startPractice" type="button">Start Practice</button>
+    <button class="secondary-btn" id="stopPractice" type="button" disabled>Stop Practice</button>
+   </div>
+   <p class="practice-note" style="text-align:center;margin:12px 0 0">Correct: +1 point · Wrong: 0 · Time Out: 0 · A new question appears automatically.</p>
+  </div>
+  <div class="practice-panel">
+   <h3>Today's Report</h3>
+   <div class="practice-stats">
+    <div class="stat"><strong id="todayTotal">0</strong><span>Total Questions</span></div>
+    <div class="stat"><strong id="todayPoints">0</strong><span>Points</span></div>
+    <div class="stat"><strong id="todayTime">0m</strong><span>Practice Time</span></div>
+   </div>
+   <table class="report-table"><thead><tr><th>Difficulty</th><th>Correct</th><th>Wrong</th><th>Time Out</th></tr></thead><tbody id="todayBreakdown"></tbody></table>
+   <p class="practice-note" id="todayAccuracy">Accuracy: 0%</p>
+  </div>
+  <div class="practice-panel">
+   <h3>Previous Days</h3>
+   <div class="report-list" id="reportHistory"><p class="practice-note">Your completed practice days will appear here.</p></div>
+  </div>
+ </div>
+</section>
+
+<div class="empty" id="empty">No matching formulas found. Try another word or switch the section.</div>
+</main>
+<footer><div class="wrap">
+<p><b>Study note:</b> This sheet follows the school Support Material and the 2026–27 Class XI syllabus scope. Some additional index-number methods printed in the Support Material (weighted methods, Laspeyres, Paasche and Fisher) are not included in the main list because the current prescribed index-number method is Simple Aggregative.</p>
+<p>Use this as a reference while solving questions. Always check the question's series type and the meaning of each symbol before substituting values.</p>
+</div></footer>
+<script>
+const statsTab=document.getElementById('statsTab');
+const microTab=document.getElementById('microTab');
+const practiceTab=document.getElementById('practiceTab');
+const stats=document.getElementById('statistics');
+const micro=document.getElementById('microeconomics');
+const practice=document.getElementById('mathPractice');
+const search=document.getElementById('search');
+const empty=document.getElementById('empty');
+let active='statistics';
+function setTab(which){
+ active=which;
+ const isStats=which==='statistics',isMicro=which==='microeconomics',isPractice=which==='mathPractice';
+ stats.classList.toggle('hidden',!isStats);micro.classList.toggle('hidden',!isMicro);practice.classList.toggle('hidden',!isPractice);
+ statsTab.setAttribute('aria-selected',String(isStats));microTab.setAttribute('aria-selected',String(isMicro));practiceTab.setAttribute('aria-selected',String(isPractice));
+ search.classList.toggle('hidden',isPractice);empty.classList.toggle('hidden',isPractice);
+ if(!isPractice)filterCards();else renderReports();
+}
+statsTab.addEventListener('click',()=>setTab('statistics'));
+microTab.addEventListener('click',()=>setTab('microeconomics'));
+practiceTab.addEventListener('click',()=>setTab('mathPractice'));
+function filterCards(){
+ const q=search.value.trim().toLowerCase();const section=active==='statistics'?stats:micro;let shown=0;
+ section.querySelectorAll('.card').forEach(card=>{const hay=(card.innerText+' '+(card.dataset.search||'')).toLowerCase();const match=!q||hay.includes(q);card.classList.toggle('hidden',!match);if(match)shown++;});
+ section.querySelectorAll('.group').forEach(group=>{const has=[...group.querySelectorAll('.card')].some(c=>!c.classList.contains('hidden'));group.classList.toggle('hidden',!has);});
+ empty.style.display=shown?'none':'block';
+}
+search.addEventListener('input',filterCards);
+document.addEventListener('click',async e=>{const btn=e.target.closest('[data-copy]');if(!btn)return;const text=btn.dataset.copy;try{await navigator.clipboard.writeText(text);const old=btn.textContent;btn.textContent='Copied';setTimeout(()=>btn.textContent=old,1100);}catch{btn.textContent='Select formula';const formula=btn.closest('.card').querySelector('.formula');const range=document.createRange();range.selectNodeContents(formula);const selection=window.getSelection();selection.removeAllRanges();selection.addRange(range);}});
+
+// Offline Math Practice: daily summaries are stored locally in this browser.
+const STORAGE_KEY='economicsMathPractice_v1';
+const limits={easy:30,medium:20,hard:10};
+const names={easy:'Easy',medium:'Medium',hard:'Hard'};
+let mode='easy',running=false,currentAnswer=null,questionStarted=0,remaining=30,timerHandle=null,feedbackHandle=null,questionResolved=false;
+let session={points:0,correct:0,attempted:0};
+let store=loadStore();
+function localDay(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function blankDay(){return {easy:{correct:0,wrong:0,timeout:0,points:0,timeMs:0},medium:{correct:0,wrong:0,timeout:0,points:0,timeMs:0},hard:{correct:0,wrong:0,timeout:0,points:0,timeMs:0}};}
+function loadStore(){try{const x=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');return x&&typeof x==='object'?x:{};}catch{return {};}}
+function saveStore(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(store));}catch{feedback.textContent='Could not save report. Browser storage may be full.';}}
+function todayData(){const k=localDay();if(!store[k])store[k]=blankDay();return store[k];}
+function totals(data){let t={correct:0,wrong:0,timeout:0,points:0,timeMs:0};Object.values(data||{}).forEach(v=>Object.keys(t).forEach(k=>t[k]+=Number(v[k]||0)));return t;}
+function formatTime(ms){const sec=Math.floor(ms/1000),h=Math.floor(sec/3600),m=Math.floor((sec%3600)/60),s=sec%60;if(h)return `${h}h ${m}m`;if(m)return `${m}m ${s}s`;return `${s}s`;}
+function renderReports(){
+ const data=todayData(),t=totals(data),total=t.correct+t.wrong+t.timeout;
+ document.getElementById('todayTotal').textContent=total;document.getElementById('todayPoints').textContent=t.points;document.getElementById('todayTime').textContent=formatTime(t.timeMs);
+ document.getElementById('todayBreakdown').innerHTML=['easy','medium','hard'].map(m=>`<tr><td>${names[m]}</td><td>${data[m].correct}</td><td>${data[m].wrong}</td><td>${data[m].timeout}</td></tr>`).join('');
+ document.getElementById('todayAccuracy').textContent=`Accuracy: ${total?Math.round(t.correct/total*100):0}% · Wrong and Time Out do not reduce points.`;
+ const days=Object.keys(store).filter(k=>k!==localDay()).sort().reverse();
+ document.getElementById('reportHistory').innerHTML=days.length?days.map(k=>{const z=totals(store[k]);const n=z.correct+z.wrong+z.timeout;return `<div class="report-day"><div><b>${k}</b><small>${n} questions · ${z.correct} correct · ${z.wrong} wrong · ${z.timeout} time out</small></div><div style="text-align:right"><b>${z.points} pts</b><small>${formatTime(z.timeMs)}</small></div></div>`;}).join(''):'<p class="practice-note">Your completed practice days will appear here.</p>';
+}
+function chooseMode(m){if(running)return;mode=m;document.querySelectorAll('.mode-btn').forEach(b=>b.classList.toggle('active',b.dataset.mode===m));document.getElementById('timerText').textContent=`${limits[m]} seconds`;
+}
+document.querySelectorAll('.mode-btn').forEach(b=>b.addEventListener('click',()=>chooseMode(b.dataset.mode)));
+function randomInt(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+function makeQuestion(){
+ let a,b,op;const level=mode;
+ if(level==='easy'){
+  op=['+','−','×','÷'][randomInt(0,3)];
+  if(op==='+'){a=randomInt(1,30);b=randomInt(1,30);currentAnswer=a+b;}
+  if(op==='−'){a=randomInt(1,30);b=randomInt(1,a);currentAnswer=a-b;}
+  if(op==='×'){a=randomInt(2,10);b=randomInt(2,10);currentAnswer=a*b;}
+  if(op==='÷'){b=randomInt(2,10);currentAnswer=randomInt(2,10);a=b*currentAnswer;}
+ }else if(level==='medium'){
+  op=['+','−','×','÷'][randomInt(0,3)];
+  if(op==='+'){a=randomInt(25,150);b=randomInt(15,125);currentAnswer=a+b;}
+  if(op==='−'){a=randomInt(40,180);b=randomInt(10,a);currentAnswer=a-b;}
+  if(op==='×'){a=randomInt(6,18);b=randomInt(6,18);currentAnswer=a*b;}
+  if(op==='÷'){b=randomInt(3,18);currentAnswer=randomInt(3,18);a=b*currentAnswer;}
+ }else{
+  op=['+','−','×','÷'][randomInt(0,3)];
+  if(op==='+'){a=randomInt(150,999);b=randomInt(100,899);currentAnswer=a+b;}
+  if(op==='−'){a=randomInt(200,999);b=randomInt(100,a);currentAnswer=a-b;}
+  if(op==='×'){a=randomInt(12,35);b=randomInt(12,35);currentAnswer=a*b;}
+  if(op==='÷'){b=randomInt(8,35);currentAnswer=randomInt(8,35);a=b*currentAnswer;}
+ }
+ document.getElementById('questionText').textContent=`${a} ${op} ${b} = ?`;
+}
+function setAnswerEnabled(v){document.getElementById('answerInput').disabled=!v;document.getElementById('submitAnswer').disabled=!v;if(v)document.getElementById('answerInput').focus();}
+function nextQuestion(){if(!running)return;clearTimeout(feedbackHandle);questionResolved=false;makeQuestion();remaining=limits[mode]*1000;questionStarted=Date.now();document.getElementById('questionLabel').textContent=`${names[mode]} · Question`;document.getElementById('answerInput').value='';document.getElementById('feedback').textContent='';setAnswerEnabled(true);updateTimer();}
+function updateTimer(){if(!running||questionResolved)return;const elapsed=Date.now()-questionStarted;remaining=Math.max(0,limits[mode]*1000-elapsed);document.getElementById('timerFill').style.width=`${remaining/(limits[mode]*10)}%`;document.getElementById('timerText').textContent=`${(remaining/1000).toFixed(1)} seconds`;if(remaining<=0){questionResolved=true;record('timeout');document.getElementById('feedback').textContent='Time Out — next question!';setAnswerEnabled(false);feedbackHandle=setTimeout(nextQuestion,450);}}
+function record(result){const elapsed=Math.min(Date.now()-questionStarted,limits[mode]*1000);const d=todayData()[mode];d[result]++;d.timeMs+=elapsed;if(result==='correct'){d.points++;session.points++;session.correct++;}session.attempted++;document.getElementById('sessionPoints').textContent=session.points;document.getElementById('sessionCorrect').textContent=session.correct;document.getElementById('sessionAttempted').textContent=session.attempted;saveStore();renderReports();}
+function submitCurrent(e){e.preventDefault();if(!running||questionResolved||Date.now()-questionStarted>=limits[mode]*1000)return;const field=document.getElementById('answerInput');if(field.value.trim()===''){field.focus();return;}questionResolved=true;const value=Number(field.value);setAnswerEnabled(false);if(value===currentAnswer){record('correct');document.getElementById('feedback').textContent='Correct! +1 point';}else{record('wrong');document.getElementById('feedback').textContent=`Wrong — correct answer: ${currentAnswer}`;}feedbackHandle=setTimeout(nextQuestion,650);}
+document.getElementById('answerForm').addEventListener('submit',submitCurrent);
+function startPractice(){if(running)return;running=true;session={points:0,correct:0,attempted:0};document.getElementById('sessionPoints').textContent='0';document.getElementById('sessionCorrect').textContent='0';document.getElementById('sessionAttempted').textContent='0';const startBtn=document.getElementById('startPractice'),stopBtn=document.getElementById('stopPractice');startBtn.disabled=true;stopBtn.disabled=false;stopBtn.classList.add('is-primary');document.querySelectorAll('.mode-btn').forEach(b=>b.disabled=true);nextQuestion();clearInterval(timerHandle);timerHandle=setInterval(updateTimer,80);}
+function stopPractice(){if(!running)return;running=false;clearInterval(timerHandle);clearTimeout(feedbackHandle);setAnswerEnabled(false);const startBtn=document.getElementById('startPractice'),stopBtn=document.getElementById('stopPractice');startBtn.disabled=false;stopBtn.disabled=true;stopBtn.classList.remove('is-primary');document.querySelectorAll('.mode-btn').forEach(b=>b.disabled=false);document.getElementById('questionLabel').textContent='Practice stopped';document.getElementById('questionText').textContent='Ready for another round?';document.getElementById('timerText').textContent='';document.getElementById('timerFill').style.width='0%';document.getElementById('feedback').textContent=`Session complete · This session: ${session.points} points · Today: ${totals(todayData()).points} points`;}
+document.getElementById('startPractice').addEventListener('click',startPractice);document.getElementById('stopPractice').addEventListener('click',stopPractice);
+renderReports();
+</script>
+<script>
+// Register the service worker so the Formula Book can be installed and used offline.
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(err => console.warn('Offline support could not be enabled:', err));
+  });
+}
+</script>
+</body>
+</html>

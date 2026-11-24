@@ -1,0 +1,26 @@
+{
+  "id": "./economics_formula_book_math_practice.html",
+  "name": "Economics Formula Book",
+  "short_name": "Economics Book",
+  "description": "Class 11 Economics formulas and offline mental-math practice.",
+  "start_url": "./economics_formula_book_math_practice.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#101010",
+  "theme_color": "#111111",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
