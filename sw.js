@@ -1,4 +1,4 @@
-const CACHE_NAME = 'economics-formula-book-v1';
+const CACHE_NAME = 'economics-formula-book-v2';
 const APP_SHELL = [
   './',
   './index.html',
@@ -38,8 +38,11 @@ self.addEventListener('fetch', event => {
       const cache = await caches.open(CACHE_NAME);
       try {
         const response = await fetch(request);
-        if (response.ok) await cache.put('./index.html', response.clone());
-        return response;
+        if (response.ok) {
+          await cache.put('./index.html', response.clone());
+          return response;
+        }
+        return (await cache.match('./index.html')) || response;
       } catch (_) {
         return (await cache.match(request)) || (await cache.match('./index.html')) || Response.error();
       }
