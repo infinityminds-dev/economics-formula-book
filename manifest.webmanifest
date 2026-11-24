@@ -3,7 +3,7 @@
   "name": "Economics Formula Book",
   "short_name": "Economics Book",
   "description": "Class 11 Economics formulas and offline mental-math practice.",
-  "start_url": "./economics_formula_book_math_practice.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#101010",
