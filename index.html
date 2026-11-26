@@ -38,7 +38,7 @@ h3{font-size:1.05rem;color:var(--gold);margin:0 0 12px;padding-bottom:7px;border
 .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px;min-width:0}
 .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .card h4{font-size:1rem;margin:0 0 9px}
-.copy{flex:none;border:1px solid var(--line);background:var(--panel2);color:var(--gold);border-radius:8px;padding:6px 9px;font-size:.8rem}
+.learn-btn{display:inline-block;margin-top:10px;border:1px solid var(--gold);background:#2a2415;color:#f2d77e;border-radius:9px;padding:9px 12px;text-decoration:none;font-weight:700;font-size:.88rem}.copy{flex:none;border:1px solid var(--line);background:var(--panel2);color:var(--gold);border-radius:8px;padding:6px 9px;font-size:.8rem}
 .formula{background:#111;padding:11px 12px;border-radius:9px;border:1px solid #302b20;color:#f8e7b0;font:600 .98rem/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;margin:4px 0 10px}
 .meta{color:var(--muted);font-size:.9rem;margin:6px 0 0}
 .meta b{color:#ded8c7;font-weight:650}
@@ -62,6 +62,17 @@ footer{border-top:1px solid var(--line);padding:18px 0 28px;color:var(--muted);f
 .math-formula mjx-container[display=true]{margin:.15em 0!important}
 
 /* Math Practice */
+.custom-practice{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.custom-btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:9px;padding:9px 12px}
+.custom-btn.active{border-color:var(--gold);color:#f2d77e;background:#2a2415}
+.explanation-panel{margin-top:14px;padding:14px;background:#111;border:1px solid var(--gold);border-radius:13px}
+.explanation-steps{padding-left:22px;color:var(--text)}
+.explanation-steps li{margin:6px 0}
+#threeScene{width:100%;height:260px;display:block;border-radius:10px;background:#090909;overflow:hidden}
+#threeCaption{margin:8px 0 0;text-align:center;color:var(--muted);font-size:.88rem}
+.review-item{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px;background:#111;border:1px solid var(--line);border-radius:10px}
+.review-item small{display:block;color:var(--muted)}.review-item .review-status{color:#d8b44a;font-weight:700;margin-top:4px}
+
 .practice-wrap{max-width:760px;margin:10px auto 28px}
 .practice-panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;margin:14px 0}
 .practice-modes{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:14px 0}
@@ -123,6 +134,7 @@ window.MathJax = {
 <button aria-controls="statistics" aria-selected="true" class="tab" id="statsTab" role="tab">Statistics for Economics</button>
 <button aria-controls="microeconomics" aria-selected="false" class="tab" id="microTab" role="tab">Introductory Microeconomics</button>
 <button aria-controls="mathPractice" aria-selected="false" class="tab" id="practiceTab" role="tab">Math Practice</button>
+<a class="tab" href="./formula-learning.html" style="text-decoration:none">Formula Learning</a>
 </div>
 </div>
 <section aria-labelledby="statsTab" id="statistics" role="tabpanel">
@@ -150,6 +162,7 @@ window.MathJax = {
 <div class="formula math-formula">\[\bar X=\frac{\sum X}{N}\]</div>
 <p class="meta"><b>Symbols:</b> ΣX = sum of observations; N = number of observations.</p>
 <p class="meta"><b>Use:</b> When individual observations are given.</p>
+<a class="learn-btn" href="./formula-learning.html?formula=arithmetic-mean-individual-direct">View 3D Visualisation Example</a>
 </article>
 <article class="card" data-search="arithmetic mean individual series assumed shortcut mean deviation">
 <div class="card-top"><h4>Arithmetic Mean — Individual Series (Shortcut)</h4><button class="copy" data-copy="X̄ = A + (Σd / N), where d = X − A">Copy</button></div>
@@ -510,6 +523,14 @@ window.MathJax = {
     <button class="mode-btn" data-mode="medium" type="button">Medium<small>20 seconds</small></button>
     <button class="mode-btn" data-mode="hard" type="button">Hard<small>10 seconds</small></button>
    </div>
+   <h3>Custom Practice</h3>
+   <div class="custom-practice" role="group" aria-label="Choose arithmetic operation">
+    <button class="custom-btn active" data-operation="all" type="button">Mixed</button>
+    <button class="custom-btn" data-operation="+" type="button">Addition +</button>
+    <button class="custom-btn" data-operation="−" type="button">Subtraction −</button>
+    <button class="custom-btn" data-operation="×" type="button">Multiplication ×</button>
+    <button class="custom-btn" data-operation="÷" type="button">Division ÷</button>
+   </div>
    <div class="practice-stats">
     <div class="stat"><strong id="sessionPoints">0</strong><span>Points this session</span></div>
     <div class="stat"><strong id="sessionCorrect">0</strong><span>Correct</span></div>
@@ -526,11 +547,37 @@ window.MathJax = {
     <button class="action-btn" id="submitAnswer" type="submit" disabled>Submit</button>
    </form>
    <div class="feedback" id="feedback" aria-live="polite">Press Start Practice to begin.</div>
+   <div class="explanation-panel hidden" id="explanationPanel">
+    <h3 id="explanationTitle">Question Explanation</h3>
+    <p id="explanationSummary"></p>
+    <ol class="explanation-steps" id="explanationSteps"></ol>
+    <canvas id="threeScene" aria-label="Three-dimensional calculation visualization"></canvas>
+    <p class="practice-note" id="threeCaption"></p>
+    <p class="practice-note">Question timer paused · Session time continues</p>
+    <div class="action-row"><button class="action-btn" id="nextQuestionBtn" type="button">Next Question</button></div>
+   </div>
    <div class="action-row">
     <button class="action-btn" id="startPractice" type="button">Start Practice</button>
     <button class="secondary-btn" id="stopPractice" type="button" disabled>Stop Practice</button>
    </div>
-   <p class="practice-note" style="text-align:center;margin:12px 0 0">Correct: +1 point · Wrong: 0 · Time Out: 0 · A new question appears automatically.</p>
+   <p class="practice-note" style="text-align:center;margin:12px 0 0">Correct: +1 point · Wrong: 0 · Time Out: 0 · Correct answers move on automatically; review mistakes before continuing.</p>
+  </div>
+  <div class="practice-panel">
+   <h3>Progress</h3>
+   <div class="practice-stats">
+    <div class="stat"><strong id="bestScore">0</strong><span>Best Session Score</span></div>
+    <div class="stat"><strong id="dailyStreak">0</strong><span>Daily Streak</span></div>
+    <div class="stat"><strong id="wrongCount">0</strong><span>Wrong to Review</span></div>
+   </div>
+   <div class="action-row" style="margin-top:14px">
+    <button class="secondary-btn" id="enableStreakReminders" type="button">Enable Streak Reminders</button>
+    <button class="secondary-btn hidden" id="disableStreakReminders" type="button">Disable Streak Reminders</button>
+   </div>
+   <p class="practice-note" id="streakReminderStatus" aria-live="polite">Get a reminder every 2 hours if you have an active streak and have not practised today.</p>
+  </div>
+  <div class="practice-panel">
+   <h3>Wrong Answer Review</h3>
+   <div class="report-list" id="wrongReviewList"><p class="practice-note">Incorrect questions will appear here.</p></div>
   </div>
   <div class="practice-panel">
    <h3>Today's Report</h3>
@@ -590,11 +637,15 @@ const STORAGE_KEY='economicsMathPractice_v1';
 const limits={easy:30,medium:20,hard:10};
 const names={easy:'Easy',medium:'Medium',hard:'Hard'};
 let mode='easy',running=false,currentAnswer=null,questionStarted=0,remaining=30,timerHandle=null,feedbackHandle=null,questionResolved=false;
+let currentQuestion=null,customOperation='all',pendingRetry=null,currentReviewItem=null,explanationShownAt=0,sessionStartedAt=0,streakCount=0;
 let session={points:0,correct:0,attempted:0};
 let store=loadStore();
 function localDay(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
 function blankDay(){return {easy:{correct:0,wrong:0,timeout:0,points:0,timeMs:0},medium:{correct:0,wrong:0,timeout:0,points:0,timeMs:0},hard:{correct:0,wrong:0,timeout:0,points:0,timeMs:0}};}
 function loadStore(){try{const x=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');return x&&typeof x==='object'?x:{};}catch{return {};}}
+function metaData(){if(!store.__meta||typeof store.__meta!=='object')store.__meta={bestScore:0,streak:0,lastPracticeDate:'',wrongQuestions:[]};const m=store.__meta;if(!Array.isArray(m.wrongQuestions))m.wrongQuestions=[];return m;}
+function yesterdayKey(){const d=new Date();d.setDate(d.getDate()-1);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function updateStreak(){const m=metaData(),today=localDay();if(m.lastPracticeDate===today)return;if(m.lastPracticeDate===yesterdayKey())m.streak=(Number(m.streak)||0)+1;else m.streak=1;m.lastPracticeDate=today;}
 function saveStore(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(store));}catch{feedback.textContent='Could not save report. Browser storage may be full.';}}
 function todayData(){const k=localDay();if(!store[k])store[k]=blankDay();return store[k];}
 function totals(data){let t={correct:0,wrong:0,timeout:0,points:0,timeMs:0};Object.values(data||{}).forEach(v=>Object.keys(t).forEach(k=>t[k]+=Number(v[k]||0)));return t;}
@@ -604,46 +655,299 @@ function renderReports(){
  document.getElementById('todayTotal').textContent=total;document.getElementById('todayPoints').textContent=t.points;document.getElementById('todayTime').textContent=formatTime(t.timeMs);
  document.getElementById('todayBreakdown').innerHTML=['easy','medium','hard'].map(m=>`<tr><td>${names[m]}</td><td>${data[m].correct}</td><td>${data[m].wrong}</td><td>${data[m].timeout}</td></tr>`).join('');
  document.getElementById('todayAccuracy').textContent=`Accuracy: ${total?Math.round(t.correct/total*100):0}% · Wrong and Time Out do not reduce points.`;
- const days=Object.keys(store).filter(k=>k!==localDay()).sort().reverse();
+ const days=Object.keys(store).filter(k=>/^\d{4}-\d{2}-\d{2}$/.test(k)&&k!==localDay()).sort().reverse();
  document.getElementById('reportHistory').innerHTML=days.length?days.map(k=>{const z=totals(store[k]);const n=z.correct+z.wrong+z.timeout;return `<div class="report-day"><div><b>${k}</b><small>${n} questions · ${z.correct} correct · ${z.wrong} wrong · ${z.timeout} time out</small></div><div style="text-align:right"><b>${z.points} pts</b><small>${formatTime(z.timeMs)}</small></div></div>`;}).join(''):'<p class="practice-note">Your completed practice days will appear here.</p>';
+ const meta=metaData();document.getElementById('bestScore').textContent=meta.bestScore||0;document.getElementById('dailyStreak').textContent=meta.streak||0;document.getElementById('wrongCount').textContent=meta.wrongQuestions.length;renderWrongReview();
 }
 function chooseMode(m){if(running)return;mode=m;document.querySelectorAll('.mode-btn').forEach(b=>b.classList.toggle('active',b.dataset.mode===m));document.getElementById('timerText').textContent=`${limits[m]} seconds`;
 }
 document.querySelectorAll('.mode-btn').forEach(b=>b.addEventListener('click',()=>chooseMode(b.dataset.mode)));
+document.querySelectorAll('.custom-btn').forEach(b=>b.addEventListener('click',()=>{if(running)return;customOperation=b.dataset.operation;document.querySelectorAll('.custom-btn').forEach(x=>x.classList.toggle('active',x===b));}));
 function randomInt(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
 function makeQuestion(){
  let a,b,op;const level=mode;
- if(level==='easy'){
-  op=['+','−','×','÷'][randomInt(0,3)];
-  if(op==='+'){a=randomInt(1,30);b=randomInt(1,30);currentAnswer=a+b;}
-  if(op==='−'){a=randomInt(1,30);b=randomInt(1,a);currentAnswer=a-b;}
-  if(op==='×'){a=randomInt(2,10);b=randomInt(2,10);currentAnswer=a*b;}
-  if(op==='÷'){b=randomInt(2,10);currentAnswer=randomInt(2,10);a=b*currentAnswer;}
- }else if(level==='medium'){
-  op=['+','−','×','÷'][randomInt(0,3)];
-  if(op==='+'){a=randomInt(25,150);b=randomInt(15,125);currentAnswer=a+b;}
-  if(op==='−'){a=randomInt(40,180);b=randomInt(10,a);currentAnswer=a-b;}
-  if(op==='×'){a=randomInt(6,18);b=randomInt(6,18);currentAnswer=a*b;}
-  if(op==='÷'){b=randomInt(3,18);currentAnswer=randomInt(3,18);a=b*currentAnswer;}
- }else{
-  op=['+','−','×','÷'][randomInt(0,3)];
-  if(op==='+'){a=randomInt(150,999);b=randomInt(100,899);currentAnswer=a+b;}
-  if(op==='−'){a=randomInt(200,999);b=randomInt(100,a);currentAnswer=a-b;}
-  if(op==='×'){a=randomInt(12,35);b=randomInt(12,35);currentAnswer=a*b;}
-  if(op==='÷'){b=randomInt(8,35);currentAnswer=randomInt(8,35);a=b*currentAnswer;}
+ if(pendingRetry){const q=pendingRetry;pendingRetry=null;currentReviewItem=q;a=q.a;b=q.b;op=q.op;currentAnswer=q.answer;}
+ else {currentReviewItem=null;
+  const available=customOperation==='all'?['+','−','×','÷']:[customOperation];op=available[randomInt(0,available.length-1)];
+  if(level==='easy'){
+   if(op==='+'){a=randomInt(1,30);b=randomInt(1,30);currentAnswer=a+b;}
+   if(op==='−'){a=randomInt(1,30);b=randomInt(1,a);currentAnswer=a-b;}
+   if(op==='×'){a=randomInt(2,10);b=randomInt(2,10);currentAnswer=a*b;}
+   if(op==='÷'){b=randomInt(2,10);currentAnswer=randomInt(2,10);a=b*currentAnswer;}
+  }else if(level==='medium'){
+   if(op==='+'){a=randomInt(25,150);b=randomInt(15,125);currentAnswer=a+b;}
+   if(op==='−'){a=randomInt(40,180);b=randomInt(10,a);currentAnswer=a-b;}
+   if(op==='×'){a=randomInt(6,18);b=randomInt(6,18);currentAnswer=a*b;}
+   if(op==='÷'){b=randomInt(3,18);currentAnswer=randomInt(3,18);a=b*currentAnswer;}
+  }else{
+   if(op==='+'){a=randomInt(150,999);b=randomInt(100,899);currentAnswer=a+b;}
+   if(op==='−'){a=randomInt(200,999);b=randomInt(100,a);currentAnswer=a-b;}
+   if(op==='×'){a=randomInt(12,35);b=randomInt(12,35);currentAnswer=a*b;}
+   if(op==='÷'){b=randomInt(8,35);currentAnswer=randomInt(8,35);a=b*currentAnswer;}
+  }
  }
- document.getElementById('questionText').textContent=`${a} ${op} ${b} = ?`;
+ currentQuestion={a,b,op,answer:currentAnswer};document.getElementById('questionText').textContent=`${a} ${op} ${b} = ?`;
 }
 function setAnswerEnabled(v){document.getElementById('answerInput').disabled=!v;document.getElementById('submitAnswer').disabled=!v;if(v)document.getElementById('answerInput').focus();}
-function nextQuestion(){if(!running)return;clearTimeout(feedbackHandle);questionResolved=false;makeQuestion();remaining=limits[mode]*1000;questionStarted=Date.now();document.getElementById('questionLabel').textContent=`${names[mode]} · Question`;document.getElementById('answerInput').value='';document.getElementById('feedback').textContent='';setAnswerEnabled(true);updateTimer();}
-function updateTimer(){if(!running||questionResolved)return;const elapsed=Date.now()-questionStarted;remaining=Math.max(0,limits[mode]*1000-elapsed);document.getElementById('timerFill').style.width=`${remaining/(limits[mode]*10)}%`;document.getElementById('timerText').textContent=`${(remaining/1000).toFixed(1)} seconds`;if(remaining<=0){questionResolved=true;record('timeout');document.getElementById('feedback').textContent='Time Out — next question!';setAnswerEnabled(false);feedbackHandle=setTimeout(nextQuestion,450);}}
-function record(result){const elapsed=Math.min(Date.now()-questionStarted,limits[mode]*1000);const d=todayData()[mode];d[result]++;d.timeMs+=elapsed;if(result==='correct'){d.points++;session.points++;session.correct++;}session.attempted++;document.getElementById('sessionPoints').textContent=session.points;document.getElementById('sessionCorrect').textContent=session.correct;document.getElementById('sessionAttempted').textContent=session.attempted;saveStore();renderReports();}
-function submitCurrent(e){e.preventDefault();if(!running||questionResolved||Date.now()-questionStarted>=limits[mode]*1000)return;const field=document.getElementById('answerInput');if(field.value.trim()===''){field.focus();return;}questionResolved=true;const value=Number(field.value);setAnswerEnabled(false);if(value===currentAnswer){record('correct');document.getElementById('feedback').textContent='Correct! +1 point';}else{record('wrong');document.getElementById('feedback').textContent=`Wrong — correct answer: ${currentAnswer}`;}feedbackHandle=setTimeout(nextQuestion,650);}
+function nextQuestion(){if(!running)return;const wasReviewRetry=!!currentReviewItem;currentReviewItem=null;clearTimeout(feedbackHandle);if(explanationShownAt){const extra=Date.now()-explanationShownAt;if(!wasReviewRetry){todayData()[mode].timeMs+=extra;saveStore();renderReports();}explanationShownAt=0;}document.getElementById('explanationPanel').classList.add('hidden');questionResolved=false;makeQuestion();remaining=limits[mode]*1000;questionStarted=Date.now();document.getElementById('questionLabel').textContent=`${names[mode]} · Question`;document.getElementById('answerInput').value='';document.getElementById('feedback').textContent='';setAnswerEnabled(true);updateTimer();}
+function updateTimer(){if(!running||questionResolved)return;const elapsed=Date.now()-questionStarted;remaining=Math.max(0,limits[mode]*1000-elapsed);document.getElementById('timerFill').style.width=`${remaining/(limits[mode]*10)}%`;document.getElementById('timerText').textContent=`${(remaining/1000).toFixed(1)} seconds`;if(remaining<=0){questionResolved=true;if(!currentReviewItem)record('timeout');document.getElementById('feedback').textContent='Time Out — see the explanation below.';setAnswerEnabled(false);showExplanation('timeout',null);}}
+function record(result){const elapsed=Math.min(Date.now()-questionStarted,limits[mode]*1000);const d=todayData()[mode];d[result]++;d.timeMs+=elapsed;if(result==='correct'){d.points++;session.points++;session.correct++;}session.attempted++;document.getElementById('sessionPoints').textContent=session.points;document.getElementById('sessionCorrect').textContent=session.correct;document.getElementById('sessionAttempted').textContent=session.attempted;if(result==='wrong'||result==='timeout'){const meta=metaData();meta.wrongQuestions.unshift({...currentQuestion,userAnswer:result==='timeout'?null:Number(document.getElementById('answerInput').value),result,date:localDay(),mode});meta.wrongQuestions=meta.wrongQuestions.slice(0,100);}saveStore();renderReports();}
+function submitCurrent(e){e.preventDefault();if(!running||questionResolved||Date.now()-questionStarted>=limits[mode]*1000)return;const field=document.getElementById('answerInput');if(field.value.trim()===''){field.focus();return;}questionResolved=true;const value=Number(field.value);setAnswerEnabled(false);if(value===currentAnswer){const isReviewRetry=!!currentReviewItem;if(currentReviewItem){currentReviewItem.solved=true;currentReviewItem.solvedAt=localDay();saveStore();renderReports();currentReviewItem=null;}if(isReviewRetry){document.getElementById('feedback').textContent='Correct! Review completed — no extra point.';}else{record('correct');document.getElementById('feedback').textContent='Correct! +1 point';}feedbackHandle=setTimeout(nextQuestion,650);}else{if(!currentReviewItem)record('wrong');document.getElementById('feedback').textContent=`Wrong — correct answer: ${currentAnswer}`;showExplanation('wrong',value);}}
 document.getElementById('answerForm').addEventListener('submit',submitCurrent);
-function startPractice(){if(running)return;running=true;session={points:0,correct:0,attempted:0};document.getElementById('sessionPoints').textContent='0';document.getElementById('sessionCorrect').textContent='0';document.getElementById('sessionAttempted').textContent='0';const startBtn=document.getElementById('startPractice'),stopBtn=document.getElementById('stopPractice');startBtn.disabled=true;stopBtn.disabled=false;stopBtn.classList.add('is-primary');document.querySelectorAll('.mode-btn').forEach(b=>b.disabled=true);nextQuestion();clearInterval(timerHandle);timerHandle=setInterval(updateTimer,80);}
-function stopPractice(){if(!running)return;running=false;clearInterval(timerHandle);clearTimeout(feedbackHandle);setAnswerEnabled(false);const startBtn=document.getElementById('startPractice'),stopBtn=document.getElementById('stopPractice');startBtn.disabled=false;stopBtn.disabled=true;stopBtn.classList.remove('is-primary');document.querySelectorAll('.mode-btn').forEach(b=>b.disabled=false);document.getElementById('questionLabel').textContent='Practice stopped';document.getElementById('questionText').textContent='Ready for another round?';document.getElementById('timerText').textContent='';document.getElementById('timerFill').style.width='0%';document.getElementById('feedback').textContent=`Session complete · This session: ${session.points} points · Today: ${totals(todayData()).points} points`;}
+function startPractice(){if(running)return;running=true;session={points:0,correct:0,attempted:0};sessionStartedAt=Date.now();updateStreak();document.getElementById('sessionPoints').textContent='0';document.getElementById('sessionCorrect').textContent='0';document.getElementById('sessionAttempted').textContent='0';const startBtn=document.getElementById('startPractice'),stopBtn=document.getElementById('stopPractice');startBtn.disabled=true;stopBtn.disabled=false;stopBtn.classList.add('is-primary');document.querySelectorAll('.mode-btn').forEach(b=>b.disabled=true);document.querySelectorAll('.custom-btn').forEach(b=>b.disabled=true);saveStore();refreshStreakReminder();renderReports();nextQuestion();clearInterval(timerHandle);timerHandle=setInterval(updateTimer,80);}
+function stopPractice(){if(!running)return;if(explanationShownAt){if(!currentReviewItem)todayData()[mode].timeMs+=Date.now()-explanationShownAt;explanationShownAt=0;}running=false;clearInterval(timerHandle);clearTimeout(feedbackHandle);setAnswerEnabled(false);document.getElementById('explanationPanel').classList.add('hidden');const startBtn=document.getElementById('startPractice'),stopBtn=document.getElementById('stopPractice');startBtn.disabled=false;stopBtn.disabled=true;stopBtn.classList.remove('is-primary');document.querySelectorAll('.mode-btn').forEach(b=>b.disabled=false);document.querySelectorAll('.custom-btn').forEach(b=>b.disabled=false);const meta=metaData();meta.bestScore=Math.max(Number(meta.bestScore)||0,session.points);saveStore();renderReports();document.getElementById('questionLabel').textContent='Practice stopped';document.getElementById('questionText').textContent='Ready for another round?';document.getElementById('timerText').textContent='';document.getElementById('timerFill').style.width='0%';document.getElementById('feedback').textContent=`Session complete · This session: ${session.points} points · Best: ${meta.bestScore} points`;}
+function renderWrongReview(){const list=metaData().wrongQuestions,el=document.getElementById('wrongReviewList');el.innerHTML=list.length?list.slice(0,20).map((q,i)=>`<div class="review-item"><div><b>${q.a} ${q.op} ${q.b} = ${q.answer}</b><small>${q.result==='timeout'?'Time Out':`Your answer: ${q.userAnswer}`} · ${q.date}</small><small class="review-status">${q.solved?'✓ Solved correctly once':'Not solved yet'}</small></div><button class="secondary-btn" type="button" data-retry-index="${i}">Retry</button></div>`).join(''):'<p class="practice-note">No incorrect questions yet. Great work!</p>';}
+document.getElementById('wrongReviewList').addEventListener('click',e=>{const btn=e.target.closest('[data-retry-index]');if(!btn)return;const q=metaData().wrongQuestions[Number(btn.dataset.retryIndex)];if(!q)return;pendingRetry=q;if(!running){startPractice();}else{nextQuestion();}});
+document.getElementById('nextQuestionBtn').addEventListener('click',nextQuestion);
+function explanationText(q){const {a,b,op,answer}=q;let steps=[];if(op==='+'){steps=[`Start with ${a}.`,`Add ${b}: ${a} + ${b} = ${answer}.`,`So the answer is ${answer}.`];}else if(op==='−'){steps=[`Start with ${a}.`,`Take away ${b}: ${a} − ${b} = ${answer}.`,`So the answer is ${answer}.`];}else if(op==='×'){steps=[`${a} × ${b} means ${b} equal groups of ${a}.`,`Add the groups: ${Array.from({length:Math.min(b,12)},()=>a).join(' + ')}${b>12?' + …':''}.`,`The total is ${answer}.`];}else{steps=[`${a} ÷ ${b} asks how many groups of ${b} fit into ${a}.`,`Since ${b} × ${answer} = ${a}, there are ${answer} groups.`,`So ${a} ÷ ${b} = ${answer}.`];}return steps;}
+function showExplanation(result,userAnswer){const q=currentQuestion;document.getElementById('explanationTitle').textContent=result==='wrong'?'Wrong Answer — Learn the Steps':'Time Out — Learn the Steps';document.getElementById('explanationSummary').textContent=`${q.a} ${q.op} ${q.b} = ${q.answer}${result==='wrong'?` · Your answer: ${userAnswer}.`:' · The correct answer is shown above.'}`;document.getElementById('explanationSteps').innerHTML=explanationText(q).map(x=>`<li>${x}</li>`).join('');document.getElementById('explanationPanel').classList.remove('hidden');explanationShownAt=Date.now();if(window.renderThreeExplanation)window.renderThreeExplanation(q);}
 document.getElementById('startPractice').addEventListener('click',startPractice);document.getElementById('stopPractice').addEventListener('click',stopPractice);
+// Daily Streak reminders: first reminder after 2 hours, then repeat every 2 hours.
+const STREAK_REMINDER_INTERVAL = 2 * 60 * 60 * 1000;
+const STREAK_REMINDER_NEXT_KEY = 'economicsStreakReminderNext_v1';
+const STREAK_REMINDER_ENABLED_KEY = 'economicsStreakReminderEnabled_v1';
+const enableReminderButton = document.getElementById('enableStreakReminders');
+const disableReminderButton = document.getElementById('disableStreakReminders');
+
+// Keep a previous opt-in when this updated file is first opened.
+if (localStorage.getItem(STREAK_REMINDER_ENABLED_KEY) === null &&
+    'Notification' in window && Notification.permission === 'granted') {
+ localStorage.setItem(STREAK_REMINDER_ENABLED_KEY, 'true');
+}
+function remindersAreEnabled() {
+ return localStorage.getItem(STREAK_REMINDER_ENABLED_KEY) === 'true';
+}
+function updateReminderButtons() {
+ const enabled = remindersAreEnabled();
+ enableReminderButton.classList.toggle('hidden', enabled);
+ disableReminderButton.classList.toggle('hidden', !enabled);
+}
+let streakReminderTimer = null;
+
+function streakNeedsReminder() {
+ const meta = metaData();
+ return Number(meta.streak) > 0 && meta.lastPracticeDate === yesterdayKey() && meta.lastPracticeDate !== localDay();
+}
+function reminderStatus(message) {
+ const el = document.getElementById('streakReminderStatus');
+ if (el) el.textContent = message;
+}
+function clearStreakReminderSchedule() {
+ if (streakReminderTimer) clearTimeout(streakReminderTimer);
+ streakReminderTimer = null;
+ localStorage.removeItem(STREAK_REMINDER_NEXT_KEY);
+}
+async function sendStreakReminder() {
+ if (!remindersAreEnabled() || !streakNeedsReminder() || Notification.permission !== 'granted') {
+  clearStreakReminderSchedule();
+  return;
+ }
+ const options = {
+  body: 'Your streak is waiting! Play one round now to keep it going.',
+  tag: 'economics-daily-streak-reminder',
+  renotify: true,
+  icon: './icons/icon-192.png'
+ };
+ try {
+  const registration = 'serviceWorker' in navigator ? await navigator.serviceWorker.getRegistration() : null;
+  if (registration) await registration.showNotification('Keep your Daily Streak!', options);
+  else new Notification('Keep your Daily Streak!', options);
+ } catch (err) {
+  console.warn('Streak reminder could not be shown:', err);
+ }
+ localStorage.setItem(STREAK_REMINDER_NEXT_KEY, String(Date.now() + STREAK_REMINDER_INTERVAL));
+ scheduleStreakReminder();
+}
+function scheduleStreakReminder() {
+ if (streakReminderTimer) clearTimeout(streakReminderTimer);
+ streakReminderTimer = null;
+ if (!remindersAreEnabled() || !streakNeedsReminder() || !('Notification' in window) || Notification.permission !== 'granted') return;
+ let nextAt = Number(localStorage.getItem(STREAK_REMINDER_NEXT_KEY));
+ if (!nextAt || !Number.isFinite(nextAt)) {
+  nextAt = Date.now() + STREAK_REMINDER_INTERVAL;
+  localStorage.setItem(STREAK_REMINDER_NEXT_KEY, String(nextAt));
+ }
+ streakReminderTimer = setTimeout(sendStreakReminder, Math.max(0, nextAt - Date.now()));
+}
+document.getElementById('enableStreakReminders').addEventListener('click', async () => {
+ if (!('Notification' in window)) {
+  reminderStatus('Notifications are not supported by this browser.');
+  return;
+ }
+ if (!window.isSecureContext) {
+  reminderStatus('Notifications need HTTPS. Open the published website using https://.');
+  return;
+ }
+ try {
+  const permission = await Notification.requestPermission();
+  if (permission === 'granted') {
+   reminderStatus('Reminders enabled. First reminder in 2 hours, then every 2 hours until you practise today.');
+   scheduleStreakReminder();
+  } else {
+   reminderStatus('Notifications are not allowed. You can enable them in your browser site settings.');
+  }
+ } catch (err) {
+  reminderStatus('Could not enable notifications in this browser.');
+ }
+});
+function refreshStreakReminder() {
+ if (!streakNeedsReminder()) {
+  clearStreakReminderSchedule();
+  reminderStatus('You have practised today, or there is no active streak waiting to be continued.');
+ } else if ('Notification' in window && Notification.permission === 'granted') {
+  scheduleStreakReminder();
+  reminderStatus('Reminders are enabled. A reminder will appear every 2 hours until you practise today.');
+ }
+}
+document.addEventListener('visibilitychange', () => {
+ if (!document.hidden && streakNeedsReminder() && 'Notification' in window && Notification.permission === 'granted') {
+  const nextAt = Number(localStorage.getItem(STREAK_REMINDER_NEXT_KEY));
+  if (nextAt && Date.now() >= nextAt) sendStreakReminder();
+  else scheduleStreakReminder();
+ }
+});
+updateReminderButtons();
+if (remindersAreEnabled() && 'Notification' in window && Notification.permission === 'granted') {
+ scheduleStreakReminder();
+ reminderStatus('Reminders are enabled. A reminder will appear every 2 hours until you practise today.');
+} else if (!remindersAreEnabled()) {
+ reminderStatus('Streak reminders are disabled. Enable them whenever you want.');
+}
+// Check for a new day while the page remains open, so reminders can begin after midnight.
+setInterval(refreshStreakReminder, 60 * 1000);
 renderReports();
+</script>
+<script type="module">
+import * as THREE from './vendor/three/three.module.js';
+
+let renderer, scene;
+
+function disposeScene(){
+  if(!scene)return;
+  scene.traverse(object=>{
+    if(object.geometry)object.geometry.dispose();
+    if(object.material){
+      if(Array.isArray(object.material))object.material.forEach(material=>material.dispose());
+      else object.material.dispose();
+    }
+  });
+}
+
+function renderThreeExplanation(q){
+  const canvas=document.getElementById('threeScene');
+  const caption=document.getElementById('threeCaption');
+  if(!canvas||!caption)return;
+  try{
+    if(renderer){renderer.dispose();renderer=null;}
+    disposeScene();
+    scene=new THREE.Scene();
+    scene.background=new THREE.Color(0x090909);
+
+    const width=Math.max(canvas.clientWidth,280);
+    const height=260;
+    renderer=new THREE.WebGLRenderer({canvas,antialias:false,alpha:false});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.5));
+    renderer.setSize(width,height,false);
+
+    const ambient=new THREE.AmbientLight(0xffffff,1.7);
+    scene.add(ambient);
+    const light=new THREE.DirectionalLight(0xffffff,1.1);
+    light.position.set(-4,9,7);
+    scene.add(light);
+
+    const gold=new THREE.MeshStandardMaterial({color:0xd8b44a,roughness:.72});
+    const blue=new THREE.MeshStandardMaterial({color:0x79a9d8,roughness:.72});
+    const green=new THREE.MeshStandardMaterial({color:0x8fbd8c,roughness:.72});
+    const red=new THREE.MeshStandardMaterial({color:0xc87968,roughness:.72});
+    const cubeGeometry=new THREE.BoxGeometry(.66,.66,.66);
+    const maxVisible=120;
+    let groups=[];
+    let description='';
+
+    if(q.op==='×'){
+      groups=Array.from({length:q.b},()=>({count:q.a,material:gold}));
+      description=`${q.b} equal groups × ${q.a} blocks = ${q.answer} blocks`;
+    }else if(q.op==='÷'){
+      groups=Array.from({length:q.answer},()=>({count:q.b,material:blue}));
+      description=`${q.answer} equal groups of ${q.b} = ${q.a} blocks`;
+    }else if(q.op==='+'){
+      groups=[{count:q.a,material:gold},{count:q.b,material:blue}];
+      description=`${q.a} blocks + ${q.b} blocks = ${q.answer} blocks`;
+    }else{
+      groups=[{count:q.answer,material:green},{count:q.b,material:red}];
+      description=`${q.answer} left + ${q.b} taken away = ${q.a} starting blocks`;
+    }
+
+    const total=groups.reduce((sum,g)=>sum+g.count,0);
+    let remainingBlocks=maxVisible;
+    const visibleGroups=groups.map(group=>{
+      const visible=Math.min(group.count,remainingBlocks);
+      remainingBlocks-=visible;
+      return {...group,visible};
+    }).filter(group=>group.visible>0);
+
+    const maxPerGroup=Math.max(1,...visibleGroups.map(g=>g.visible));
+    const blockCols=Math.max(1,Math.ceil(Math.sqrt(maxPerGroup)));
+    const blockRows=Math.ceil(maxPerGroup/blockCols);
+    const cellW=blockCols*.86+.65;
+    const cellD=blockRows*.86+.75;
+    const groupCols=Math.min(4,Math.max(1,visibleGroups.length));
+    const groupRows=Math.ceil(visibleGroups.length/groupCols);
+    const totalW=groupCols*cellW;
+    const totalD=groupRows*cellD;
+
+    visibleGroups.forEach((group,index)=>{
+      const gx=index%groupCols;
+      const gz=Math.floor(index/groupCols);
+      const centerX=-totalW/2+cellW*(gx+.5);
+      const centerZ=-totalD/2+cellD*(gz+.5);
+      for(let i=0;i<group.visible;i++){
+        const col=i%blockCols;
+        const row=Math.floor(i/blockCols);
+        const mesh=new THREE.Mesh(cubeGeometry,group.material);
+        mesh.position.set(
+          centerX+(col-(Math.min(blockCols,group.visible)-1)/2)*.86,
+          .34,
+          centerZ+(row-(Math.ceil(group.visible/blockCols)-1)/2)*.86
+        );
+        scene.add(mesh);
+        const outline=new THREE.LineSegments(
+          new THREE.EdgesGeometry(cubeGeometry),
+          new THREE.LineBasicMaterial({color:0x171717})
+        );
+        outline.position.copy(mesh.position);
+        scene.add(outline);
+      }
+    });
+
+    const floor=new THREE.Mesh(
+      new THREE.PlaneGeometry(Math.max(10,totalW+1.8),Math.max(7,totalD+1.8)),
+      new THREE.MeshStandardMaterial({color:0x191919,roughness:1})
+    );
+    floor.rotation.x=-Math.PI/2;
+    floor.position.y=-.08;
+    scene.add(floor);
+
+    const aspect=width/height;
+    const viewH=Math.max(3.8,totalD+1.8,(totalW+1.8)/aspect);
+    const camera=new THREE.OrthographicCamera(-viewH*aspect/2,viewH*aspect/2,viewH/2,-viewH/2,.1,100);
+    // True top-down view: look straight at the X/Z block layout.
+    // Set camera up along the Z axis to avoid the straight-down camera singularity.
+    camera.up.set(0,0,-1);
+    camera.position.set(0,18,0);
+    camera.lookAt(0,0,0);
+    renderer.render(scene,camera);
+
+    caption.textContent=total>maxVisible
+      ? `${description}. Showing ${maxVisible} representative blocks; the exact total is written above.`
+      : description;
+  }catch(error){
+    console.warn('3D explanation unavailable:',error);
+    caption.textContent='3D view is unavailable on this device/browser. Use the written steps above.';
+  }
+}
+
+window.renderThreeExplanation=renderThreeExplanation;
 </script>
 <script>
 // Register the service worker so the Formula Book can be installed and used offline.

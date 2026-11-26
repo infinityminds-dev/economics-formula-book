@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#111111">
+<title>Formula Learning — Economics Formula Book</title>
+<style>
+:root{--bg:#101010;--panel:#191919;--panel2:#202020;--text:#f2f0e9;--muted:#aaa69b;--gold:#d8b44a;--line:#39352a;--green:#9bc79b}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}.wrap{width:min(100% - 28px,900px);margin:auto}header{padding:24px 0 18px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,#171717,#101010)}.kicker{color:var(--gold);font-size:.76rem;letter-spacing:.16em;font-weight:700}h1{font-size:clamp(1.65rem,5vw,2.4rem);line-height:1.15;margin:8px 0}.muted{color:var(--muted)}main{padding:20px 0 55px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:16px;margin:13px 0}.formula{background:#111;border:1px solid #302b20;border-radius:10px;padding:13px;color:#f8e7b0;font:700 1.08rem ui-monospace,monospace;text-align:center;overflow-wrap:anywhere}.symbols{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:9px}.symbol{background:#111;border:1px solid var(--line);padding:10px;border-radius:10px}.symbol b{color:var(--gold);font-size:1.1rem}.levels,.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:9px;padding:10px 13px;font:inherit;cursor:pointer}.btn.active,.btn.primary{background:var(--gold);border-color:var(--gold);color:#17140b;font-weight:800}.step-count{color:var(--gold);font-weight:700}.step-title{font-size:1.18rem;margin:5px 0}.step-text{margin:7px 0}.stage{background:#090909;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:12px 0}canvas{display:block;width:100%;height:220px}.caption{text-align:center;color:var(--muted);font-size:.86rem;padding:0 10px 10px}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;text-align:center;min-width:300px}th,td{padding:10px 7px;border:1px solid var(--line)}th{color:var(--gold);background:#111}.focus-cell{background:#514018;color:#fff2bf;font-weight:800}.answer{color:var(--green);font-size:1.2rem;font-weight:800}.hidden{display:none!important}input{background:#111;border:1px solid var(--line);border-radius:9px;color:var(--text);padding:11px;font:inherit;width:100%;max-width:240px}.back{color:var(--gold);text-decoration:none;display:inline-block;margin-bottom:10px}.notice{border-left:3px solid var(--gold);padding:9px 12px;background:#17150f;color:#ded8c7;border-radius:6px;font-size:.9rem}@media(max-width:480px){.panel{padding:13px}canvas{height:190px}}
+
+#formulaCatalog{margin-bottom:24px}
+.catalog-note{color:var(--muted);margin:8px 0 20px}
+.catalog-group{margin:24px 0}
+.formula-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px}
+.formula-card{display:flex;flex-direction:column;align-items:flex-start;gap:9px;
+ width:100%;padding:15px;background:var(--panel);color:var(--text);
+ border:1px solid var(--line);border-radius:12px;text-align:left}
+.formula-card strong{font-size:.95rem}
+.formula-card span{font-size:.82rem;color:var(--gold)}
+.formula-card:disabled{opacity:.62;cursor:not-allowed}
+#backToCatalog{margin:0 0 18px}
+
+</style>
+</head><body>
+<header><div class="wrap"><a class="back" href="./index.html">← Back to Formula Book</a><div class="kicker">STATISTICS FOR ECONOMICS · INTERACTIVE LEARNING</div><h1>Formula Learning</h1><p class="muted">Understand the symbols, build the solution step by step, and explore the calculation.</p></div></header>
+<main class="wrap">
+
+<section id="formulaCatalog">
+ <div class="kicker">STATISTICS FOR ECONOMICS</div>
+ <h2>Select a Formula</h2>
+ <p class="catalog-note">Choose a formula to open its step-by-step learning lesson.</p>
+<section class="catalog-group"><h3>Collection, Organisation &amp; Presentation of Data</h3><div class="formula-grid">
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Pie Diagram — Central Angle</strong>
+          <span>Coming Soon</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Class Mark / Midpoint</strong>
+          <span>Coming Soon</span>
+        </button></div></section><section class="catalog-group"><h3>Measures of Central Tendency</h3><div class="formula-grid">
+        <button class="formula-card" type="button" 
+          id='openArithmeticLesson'>
+          <strong>Arithmetic Mean — Individual Series (Direct)</strong>
+          <span>Open lesson →</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Arithmetic Mean — Individual Series (Shortcut)</strong>
+          <span>Coming Soon</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Arithmetic Mean — Individual Series (Step-Deviation)</strong>
+          <span>Coming Soon</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Arithmetic Mean — Discrete Series (Direct)</strong>
+          <span>Coming Soon</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Arithmetic Mean — Discrete Series (Shortcut)</strong>
+          <span>Coming Soon</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Arithmetic Mean — Discrete Series (Step-Deviation)</strong>
+          <span>Coming Soon</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Arithmetic Mean — Continuous Series (Direct)</strong>
+          <span>Coming Soon</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Arithmetic Mean — Continuous Series (Shortcut)</strong>
+          <span>Coming Soon</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Arithmetic Mean — Continuous Series (Step-Deviation)</strong>
+          <span>Coming Soon</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Weighted Arithmetic Mean</strong>
+          <span>Coming Soon</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Median — Individual Series (Odd N)</strong>
+          <span>Coming Soon</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Median — Individual Series (Even N)</strong>
+          <span>Coming Soon</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Median — Discrete Series</strong>
+          <span>Coming Soon</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Median — Continuous Series</strong>
+          <span>Coming Soon</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Mode — Individual / Discrete Series</strong>
+          <span>Coming Soon</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Mode — Continuous Series</strong>
+          <span>Coming Soon</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Empirical Relationship: Mean, Median &amp; Mode</strong>
+          <span>Coming Soon</span>
+        </button></div></section><section class="catalog-group"><h3>Correlation</h3><div class="formula-grid">
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Karl Pearson — Actual Mean Method</strong>
+          <span>Coming Soon</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Means of the X and Y Series</strong>
+          <span>Coming Soon</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Standard Deviations of X and Y</strong>
+          <span>Coming Soon</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Covariance of X and Y</strong>
+          <span>Coming Soon</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Karl Pearson — Assumed Mean Method</strong>
+          <span>Coming Soon</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Karl Pearson — Step-Deviation Method</strong>
+          <span>Coming Soon</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Karl Pearson — Direct Method</strong>
+          <span>Coming Soon</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Spearman Rank Correlation — No Tied Ranks</strong>
+          <span>Coming Soon</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Spearman Rank Correlation — Tied Ranks</strong>
+          <span>Coming Soon</span>
+        </button></div></section><section class="catalog-group"><h3>Index Numbers</h3><div class="formula-grid">
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Simple Aggregative Price Index</strong>
+          <span>Coming Soon</span>
+        </button>
+        <button class="formula-card" type="button" disabled
+          >
+          <strong>Rate of Inflation</strong>
+          <span>Coming Soon</span>
+        </button></div></section></section>
+<div id="lessonContent" class="hidden">
+<button type="button" id="backToCatalog" style="background:#191919 !important;color:#d8b44a !important;border:1px solid #8d7130 !important;border-radius:10px !important;padding:11px 16px !important;font:inherit !important;box-shadow:none !important;">← All Formula Cards</button>
+
+<section class="panel"><div class="muted">CURRENT LESSON</div><h2>Arithmetic Mean — Individual Series (Direct Method)</h2><div class="formula">X̄ = ΣX ÷ N</div><h3>1. Understand the symbols</h3><div class="symbols"><div class="symbol"><b>X̄</b><div>Arithmetic Mean — the average value.</div></div><div class="symbol"><b>Σ</b><div>Summation — add all the values.</div></div><div class="symbol"><b>X</b><div>Each observation or data value.</div></div><div class="symbol"><b>N</b><div>Total number of observations.</div></div></div><h3>2. What does the formula do?</h3><p>First add every observation to get ΣX. Then count how many observations there are to get N. Finally divide the total by the count. This gives the arithmetic mean.</p></section>
+<section class="panel"><h3>3. Choose difficulty</h3><div class="levels"><button class="btn active" data-level="easy">Easy</button><button class="btn" data-level="medium">Medium</button><button class="btn" data-level="hard">Hard</button></div><p class="muted" id="levelNote">Small values and a direct calculation.</p></section>
+<section class="panel"><div class="step-count" id="stepCount">STEP 1 OF 5</div><h3 class="step-title" id="stepTitle">Read the question</h3><p class="step-text" id="stepText">Find the arithmetic mean of the following observations: 5, 10, 15, 20, 25.</p><div id="tableArea" class="table-wrap"></div><div class="actions"><button class="btn" id="prev">← Previous Step</button><button class="btn primary" id="next">Next Step →</button><button class="btn" id="play">▶ Play</button></div></section>
+<section class="panel"><h3>4. Complete question and solution</h3><p class="muted">Available after the final step.</p><div id="fullSolution" class="hidden"><div id="fullText"></div><div class="actions"><button class="btn primary" id="copyAll">Copy Question &amp; Solution</button></div></div></section>
+<section class="panel"><h3>5. Try it yourself</h3><p id="practiceQuestion">Find the mean of 4, 8, 12.</p><input id="practiceAnswer" type="number" inputmode="decimal" placeholder="Enter your answer"><button class="btn primary" id="checkAnswer">Check Answer</button><p id="practiceFeedback" class="muted" aria-live="polite"></p></section>
+<section class="panel"><h3>Quick formula revision</h3><p><b>X̄ = ΣX ÷ N</b></p><p>ΣX = sum of all observations. N = number of observations. Divide the sum by the number of observations to find the mean.</p><p class="notice">Rounding-off: This example gives an exact whole-number answer, so no rounding is needed. If a question asks for a specified number of decimal places, follow that instruction and explain the rounding rule before rounding.</p></section>
+
+</div>
+</main>
+<script type="module">
+const levels={easy:{q:[5,10,15,20,25],practice:[4,8,12],note:'Small values and a direct calculation.'},medium:{q:[12,18,24,30,36,42],practice:[7,11,15,19],note:'More observations; follow the same method carefully.'},hard:{q:[14,19,23,28,31,35,42],practice:[13,17,21,25],note:'More observations and a non-integer practice result may occur.'}};
+let level='easy',step=0,timer=null;
+const $=id=>document.getElementById(id);const sum=a=>a.reduce((x,y)=>x+y,0);const mean=a=>sum(a)/a.length;
+function drawBlocks(){}
+function tableHTML(values,active){let running=0;const rows=values.map((v,i)=>{running+=v;const cls=active===i?'focus-cell':'';return `<tr><td class="${cls}">${i+1}</td><td class="${cls}">${v}</td><td class="${cls}">${i<=active?running:'—'}</td></tr>`;}).join('');return `<table><thead><tr><th>Observation No.</th><th>X (Value)</th><th>Running Total</th></tr></thead><tbody>${rows}</tbody></table>`;}
+function steps(){const a=levels[level].q,n=a.length,s=sum(a),m=mean(a),out=[];
+out.push({title:'Read the question',text:`Find the arithmetic mean of these observations: ${a.join(', ')}. These are individual observations, so we will use the Individual Series Direct Method.`,table:tableHTML(a,-1),caption:'Each group represents one observation. The exact value is shown in the table.',highlight:-1});
+out.push({title:'Understand the symbols',text:'X̄ means arithmetic mean. Σ means add all the values. X means each observation. N means the total number of observations. We will first find ΣX, then N, and finally divide.',table:'<div class="formula">X̄ = ΣX ÷ N</div>',caption:'The formula has two parts: the total of the values and the number of values.',highlight:-1});
+out.push({title:'Build the observation table',text:`Enter each value from the question in the X column. The table has ${n} rows because there are ${n} observations.`,table:tableHTML(a,-1),caption:`The ${n} given values are entered one by one in the X column.`,highlight:-1});
+let running=a[0];out.push({title:'Start adding the observations',text:`Begin with the first value: ${a[0]}. This is the starting total.`,table:tableHTML(a,0),caption:`The first observation is ${a[0]}.`,highlight:0});
+for(let i=1;i<a.length;i++){const before=running;running+=a[i];out.push({title:`Add observation ${i+1}`,text:`Previous total ${before} + next value ${a[i]} = ${running}. We add ${a[i]} to ${before}; the new running total is ${running}.`,table:tableHTML(a,i),caption:`Observation ${i+1}: ${before} + ${a[i]} = ${running}. The highlighted row is the value being added.`,highlight:i});}
+out.push({title:'Find the total number of observations',text:`Count the data values: there are ${n}. Therefore N = ${n}. The total of all values is ΣX = ${s}.`,table:tableHTML(a,a.length-1),caption:`There are ${n} observations, so N = ${n}.`,highlight:-1});
+out.push({title:'Substitute into the formula',text:`The formula is X̄ = ΣX ÷ N. Put ΣX = ${s} and N = ${n}: X̄ = ${s} ÷ ${n}. We divide the sum by the number of observations.`,table:`<div class="formula">X̄ = ${s} ÷ ${n}</div>`,caption:'The sum of all observations is divided by the count of observations.',highlight:-1});
+out.push({title:'Calculate the final answer',text:`${s} ÷ ${n} = ${m}. Therefore, the arithmetic mean is ${m}.`,table:`<div class="formula">X̄ = ${s} ÷ ${n} = ${m}</div><p class="answer">Final Answer: ${m}</p>`,caption:`The average value is ${m}.`,highlight:-1});return out;}
+function render(){const a=steps(),s=a[step];$('stepCount').textContent=`STEP ${step+1} OF ${a.length}`;$('stepTitle').textContent=s.title;$('stepText').textContent=s.text;$('tableArea').innerHTML=s.table;$('prev').disabled=step===0;$('next').textContent=step===a.length-1?'Restart Steps ↻':'Next Step →';drawBlocks(levels[level].q,s.highlight);if(step===a.length-1){$('fullSolution').classList.remove('hidden');$('fullText').innerHTML=`<p><b>Question:</b> Find the arithmetic mean of ${levels[level].q.join(', ')}.</p><p><b>Step 1 — Count observations:</b> N = ${levels[level].q.length}.</p><p><b>Step 2 — Add values:</b> ΣX = ${levels[level].q.join(' + ')} = ${sum(levels[level].q)}.</p><p><b>Step 3 — Apply formula:</b> X̄ = ΣX ÷ N = ${sum(levels[level].q)} ÷ ${levels[level].q.length} = ${mean(levels[level].q)}.</p><p class="answer">Answer: ${mean(levels[level].q)}</p>`;}else{$('fullSolution').classList.add('hidden');}}
+function stop(){if(timer){clearInterval(timer);timer=null;}$('play').textContent='▶ Play';}
+$('prev').onclick=()=>{stop();step=Math.max(0,step-1);render()};$('next').onclick=()=>{stop();step=step===steps().length-1?0:step+1;render()};$('play').onclick=()=>{if(timer){stop();return;}$('play').textContent='Ⅱ Pause';timer=setInterval(()=>{if(step>=steps().length-1){stop();return;}step++;render();},2600);$('play').textContent='Ⅱ Pause';};
+document.querySelectorAll('[data-level]').forEach(b=>b.onclick=()=>{stop();level=b.dataset.level;step=0;document.querySelectorAll('[data-level]').forEach(x=>x.classList.toggle('active',x===b));$('levelNote').textContent=levels[level].note;$('practiceQuestion').textContent=`Find the mean of ${levels[level].practice.join(', ')}.`;$('practiceAnswer').value='';$('practiceFeedback').textContent='';render();});
+$('copyAll').onclick=async()=>{const a=levels[level].q,t=`Question: Find the arithmetic mean of ${a.join(', ')}.\n\nSymbols: X̄ = arithmetic mean; Σ = sum; X = observation; N = number of observations.\n\nFormula: X̄ = ΣX ÷ N\nΣX = ${a.join(' + ')} = ${sum(a)}\nN = ${a.length}\nX̄ = ${sum(a)} ÷ ${a.length} = ${mean(a)}\nAnswer: ${mean(a)}`;try{await navigator.clipboard.writeText(t);$('copyAll').textContent='Copied!';}catch{$('copyAll').textContent='Copy not available';}};
+$('checkAnswer').onclick=()=>{const val=Number($('practiceAnswer').value),ans=mean(levels[level].practice);$('practiceFeedback').textContent=$('practiceAnswer').value.trim()===''?'Enter an answer first.':Math.abs(val-ans)<1e-9?`Correct! ${levels[level].practice.join(' + ')} ÷ ${levels[level].practice.length} = ${ans}.`:`Not quite. Add the values, then divide by ${levels[level].practice.length}. The correct answer is ${ans}.`;};
+window.initFormulaLesson = () => render();
+</script>
+<script>if('serviceWorker'in navigator&&location.protocol!=='file:'){navigator.serviceWorker.register('./sw.js').catch(()=>{});}</script>
+
+
+
+
+<script>
+(() => {
+  const catalog = document.getElementById('formulaCatalog');
+  const lesson = document.getElementById('lessonContent');
+  const open = document.getElementById('openArithmeticLesson');
+  const back = document.getElementById('backToCatalog');
+
+  if (!catalog || !lesson || !open || !back) return;
+
+  catalog.style.display = 'block';
+  lesson.classList.add('hidden');
+
+  open.addEventListener('click', () => {
+    catalog.style.display = 'none';
+    lesson.classList.remove('hidden');
+    if (!lesson.dataset.started) {
+      window.initFormulaLesson?.();
+      lesson.dataset.started = 'true';
+    }
+    window.scrollTo(0, 0);
+  });
+
+  back.addEventListener('click', () => {
+    lesson.classList.add('hidden');
+    catalog.style.display = 'block';
+    window.scrollTo(0, 0);
+  });
+})();
+</script>
+
+</body></html>
